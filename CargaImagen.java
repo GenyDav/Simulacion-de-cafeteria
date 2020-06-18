@@ -7,6 +7,8 @@ import javax.imageio.ImageIO;
 /**
  *
  * @author Geny
+ * Clase que implementa un método estático para obtener un objeto de tipo BufferedImage
+ * y poder mostrarlo despues en pantalla
  */
 public class CargaImagen {
     public static BufferedImage cargaImagen(String ruta){
