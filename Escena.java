@@ -10,7 +10,6 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 /**
  *
@@ -31,6 +30,7 @@ public class Escena {
         marco.setSize(new Dimension(566,457));
         //marco.setContentPane(lienzo);
         marco.add(lienzo);
+        
         marco.setLocationRelativeTo(null);
         marco.setVisible(true);
     }
