@@ -17,7 +17,7 @@ public class Personaje {
     private BufferedImage sprite; //sprite del personaje
     
     public Personaje(){
-        sprite = CargaImagen.cargaImagen("cafeteria/sprites/chef1.png");
+        sprite = Imagen.cargaImagen("cafeteria/sprites/chef1.png");
         x = 168;
         y = 184;
     }
