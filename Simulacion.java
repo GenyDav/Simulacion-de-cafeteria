@@ -5,10 +5,12 @@
  */
 package cafeteria;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -17,18 +19,42 @@ import javax.swing.SwingUtilities;
  * @author Geny
  */
 public class Simulacion extends JPanel{
-    private final int PX_ANCHO = 550; // ancho del lienzo
-    private final int PX_ALTO = 418;  // alto del lienzo 
-    private BufferedImage fondo;
+    private final int PX_ANCHO = 550;   // ancho del lienzo
+    private final int PX_ALTO = 418;    // alto del lienzo 
+    private BufferedImage fondo;        // imágen de fondo
+    private Consumidor link;            
+    private int i;
+    private JLabel estadisticas;
     
     public Simulacion(String imgFondo){
+        setLayout(new FlowLayout());
         setPreferredSize(new Dimension(PX_ANCHO,PX_ALTO));
         fondo = Imagen.cargaImagen(imgFondo);
+        link = new Consumidor();
+        i=0;
     }
     
     @Override
     public void paint(Graphics g){
         g.drawImage(fondo, 0,0,PX_ANCHO, PX_ALTO, this);
+        link.pintarConsumidor(g);
+        link.setSprite((i++)/100);
+        if(i>1000){
+            i=0;
+        }
+        g.drawString("Clientes", 100, 100);
+        g.setColor(new Color(0,0,0));
+        g.drawRect(255, 70, 195, 120);
+    }
+    
+    public synchronized void cicloPrincipalJuego()throws Exception{
+        long tiempoViejo = System.nanoTime();// calcula el tiempo en nanoSegundos
+        while(true){
+            long tiempoNuevo = System.nanoTime();
+            float dt = (tiempoNuevo-tiempoViejo)/1000000000f;            
+            tiempoViejo = tiempoNuevo;
+            dibuja();
+        }
     }
     
     private void dibuja()throws Exception{
@@ -36,8 +62,8 @@ public class Simulacion extends JPanel{
             @Override
             public void run(){
                 repaint();
+                //paintImmediately(0,0,PX_ANCHO,PX_ALTO);
             }
         });
     }
-    
 }
