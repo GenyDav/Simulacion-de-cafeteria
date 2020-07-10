@@ -42,9 +42,12 @@ public class Simulacion extends JPanel{
         if(i>1000){
             i=0;
         }
-        g.drawString("Clientes", 100, 100);
-        g.setColor(new Color(0,0,0));
-        g.drawRect(255, 70, 195, 120);
+        g.drawString("Clientes",10,10);
+        Color myColour = new Color(255, 255,255,127 );
+            g.setColor(myColour);
+            g.fillRect(255, 90, 190, 150);
+        g.setColor(new Color(255,255,255));
+        g.drawRect(255, 90, 190, 150);
     }
     
     public synchronized void cicloPrincipalJuego()throws Exception{
