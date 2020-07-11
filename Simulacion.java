@@ -10,7 +10,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -24,7 +23,7 @@ public class Simulacion extends JPanel{
     private BufferedImage fondo;        // imágen de fondo
     private Consumidor link;            
     private int i;
-    private JLabel estadisticas;
+    private Cliente lady;
     
     public Simulacion(String imgFondo){
         setLayout(new FlowLayout());
@@ -32,6 +31,7 @@ public class Simulacion extends JPanel{
         fondo = Imagen.cargaImagen(imgFondo);
         link = new Consumidor();
         i=0;
+        lady = new Cliente();
     }
     
     @Override
@@ -42,12 +42,12 @@ public class Simulacion extends JPanel{
         if(i>1000){
             i=0;
         }
-        g.drawString("Clientes",10,10);
-        Color myColour = new Color(255, 255,255,127 );
-            g.setColor(myColour);
-            g.fillRect(255, 90, 190, 150);
+        Color myColour = new Color(255, 255,255,150); // 127, 50%
+        g.setColor(myColour);
+        g.fillRect(255, 90, 190, 150);
         g.setColor(new Color(255,255,255));
         g.drawRect(255, 90, 190, 150);
+        lady.pintarCliente(g);
     }
     
     public synchronized void cicloPrincipalJuego()throws Exception{
@@ -56,7 +56,9 @@ public class Simulacion extends JPanel{
             long tiempoNuevo = System.nanoTime();
             float dt = (tiempoNuevo-tiempoViejo)/1000000000f;            
             tiempoViejo = tiempoNuevo;
+            // método para calcular la posicion del cliente
             dibuja();
+            lady.avanzar(dt);
         }
     }
     
