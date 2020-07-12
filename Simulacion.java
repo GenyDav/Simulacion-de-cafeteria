@@ -56,9 +56,10 @@ public class Simulacion extends JPanel{
             long tiempoNuevo = System.nanoTime();
             float dt = (tiempoNuevo-tiempoViejo)/1000000000f;            
             tiempoViejo = tiempoNuevo;
-            // método para calcular la posicion del cliente
             dibuja();
-            lady.avanzar(dt);
+            if(!link.getEstado()){ // si está desocupado
+                lady.serAtendido(dt);
+            }
         }
     }
     

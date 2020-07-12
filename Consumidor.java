@@ -16,6 +16,7 @@ public class Consumidor {
     private int x,y; // coordenadas del sprite
     private int sprite;
     private BufferedImage sprt1,sprt2,sprt3; //sprites del personaje
+    boolean ocupado;
     
     public Consumidor(){
         sprt1 = Imagen.cargaImagen("cafeteria/sprites/chef1.png");
@@ -24,6 +25,7 @@ public class Consumidor {
         sprite = 1;
         x = 168;
         y = 184;
+        ocupado = false; // cuando está desocupado es false
     }
     
     public void pintarConsumidor(Graphics g){
@@ -41,6 +43,15 @@ public class Consumidor {
                 g.drawImage(sprt1,x,y,null);
                 break;
         }
+    }
+    
+    public boolean getEstado(){
+        return ocupado;
+    }
+    
+    // Cambia el estado a ocupado(true) o libre(false)
+    public void setEstado(boolean e){
+        ocupado = e;
     }
 
     public int getSprite() {
