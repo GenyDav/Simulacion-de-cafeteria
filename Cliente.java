@@ -15,6 +15,9 @@ public class Cliente {
     private BufferedImage sprt1,sprt2,sprt3,sprtActual; //sprites del personaje
     private float tPedido; // tiempo que tardará el pedido del cliente (segundos)
     private float transcurrido;
+    private float tmpEspera; // tiempo que el cliente puede esperar en la fila
+    private float tmpEsperando; // tiempo que el cliente lleva esperando en la fila
+    private boolean saliendo;
     
     public Cliente(){
         sprt1 = Imagen.cargaImagen("cafeteria/sprites/lady5.png");
@@ -26,13 +29,42 @@ public class Cliente {
         y = 254;
         velocidad = 80;
         estado = 1;
-        tPedido = 5;
+        this.tPedido = 0;
+        this.tmpEspera = 0;
         transcurrido = 0;
+        tmpEsperando = 0;
+        saliendo = false;
+    }
+    
+    public Cliente(float tmpEspera,float tPedido){
+        sprt1 = Imagen.cargaImagen("cafeteria/sprites/lady5.png");
+        sprt2 = Imagen.cargaImagen("cafeteria/sprites/lady9.png");
+        sprt3 = Imagen.cargaImagen("cafeteria/sprites/lady4.png");
+        sprtActual = sprt1;
+        sprite = 1;
+        x = 550;
+        y = 254;
+        velocidad = 80;
+        estado = 1;
+        this.tPedido = tPedido;
+        this.tmpEspera = tmpEspera;
+        transcurrido = 0;
+        tmpEsperando = 0;
+        saliendo = false;
     }
     
     public void pintarCliente(Graphics g){
         g.drawImage(sprtActual,Math.round(x),Math.round(y),null);
         g.drawString("algo", Math.round(x), Math.round(y-20));
+    }
+    
+    public void restarTiempoEspera(float dt){
+        tmpEsperando += dt;
+        if(tmpEsperando>tmpEspera){
+            sprtActual = sprt3;
+            estado = 3;
+            saliendo = true;
+        }
     }
     
     public void serAtendido(float dt){
@@ -47,12 +79,6 @@ public class Cliente {
                 }
                 break;
             case 2:
-                /*try{                
-                    Thread.sleep(1000);
-                }catch(InterruptedException e){}*/
-                
-                //System.out.println("Despertando");
-                //System.out.println("Cambiando a 3");
                 transcurrido += dt;
                 System.out.println(transcurrido);
                 if(transcurrido>tPedido){
@@ -63,10 +89,13 @@ public class Cliente {
             case 3:
                 //System.out.println(y);
                 if(y<418){
-                    //System.out.println("sleep: "+dt);
                     y += velocidad*dt;
                 }
                 break;
         }
+    }
+    
+    public boolean getSalida(){
+        return saliendo;
     }
 }

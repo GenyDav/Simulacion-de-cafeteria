@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -21,9 +22,11 @@ public class Simulacion extends JPanel{
     private final int PX_ANCHO = 550;   // ancho del lienzo
     private final int PX_ALTO = 418;    // alto del lienzo 
     private BufferedImage fondo;        // imágen de fondo
-    private Consumidor link;            
+    private Consumidor link;            // objeto que 'atiende' a los clientes
     private int i;
-    private Cliente lady;
+    private Cliente cteActual;
+    private ArrayList<Cliente> fila;        // fila de clientes esperando a ser atendidos
+    private ArrayList<Cliente> impacientes; // clientes que se salen de la fila
     
     public Simulacion(String imgFondo){
         setLayout(new FlowLayout());
@@ -31,7 +34,11 @@ public class Simulacion extends JPanel{
         fondo = Imagen.cargaImagen(imgFondo);
         link = new Consumidor();
         i=0;
-        lady = new Cliente();
+        cteActual = new Cliente();
+        fila = new ArrayList();
+        impacientes = new ArrayList();
+        fila.add(new Cliente(5f,5f));
+        fila.add(new Cliente(2,5));
     }
     
     @Override
@@ -47,7 +54,7 @@ public class Simulacion extends JPanel{
         g.fillRect(255, 90, 190, 150);
         g.setColor(new Color(255,255,255));
         g.drawRect(255, 90, 190, 150);
-        lady.pintarCliente(g);
+        cteActual.pintarCliente(g);
     }
     
     public synchronized void cicloPrincipalJuego()throws Exception{
@@ -58,7 +65,18 @@ public class Simulacion extends JPanel{
             tiempoViejo = tiempoNuevo;
             dibuja();
             if(!link.getEstado()){ // si está desocupado
-                lady.serAtendido(dt);
+                cteActual = fila.get(0);
+                fila.remove(0);
+                link.setEstado(true);
+            }else{ // si está ocupado
+                cteActual.serAtendido(dt);
+                for(int n=0;n<fila.size();n++){
+                    fila.get(n).restarTiempoEspera(dt);
+                    if(fila.get(n).getSalida()){
+                        impacientes.add(fila.get(n));
+                        fila.remove(i);
+                    }
+                }
             }
         }
     }
@@ -68,7 +86,6 @@ public class Simulacion extends JPanel{
             @Override
             public void run(){
                 repaint();
-                //paintImmediately(0,0,PX_ANCHO,PX_ALTO);
             }
         });
     }
