@@ -16,7 +16,6 @@ public class Cliente {
     private float tPedido; // tiempo que tardará el pedido del cliente (segundos)
     private float transcurrido;
     private float tmpEspera; // tiempo que el cliente puede esperar en la fila
-    private float tmpEsperando; // tiempo que el cliente lleva esperando en la fila
     private boolean saliendo;
     
     public Cliente(){
@@ -32,7 +31,6 @@ public class Cliente {
         this.tPedido = 0;
         this.tmpEspera = 0;
         transcurrido = 0;
-        tmpEsperando = 0;
         saliendo = false;
     }
     
@@ -49,7 +47,6 @@ public class Cliente {
         this.tPedido = tPedido;
         this.tmpEspera = tmpEspera;
         transcurrido = 0;
-        tmpEsperando = 0;
         saliendo = false;
     }
     
@@ -59,8 +56,9 @@ public class Cliente {
     }
     
     public void restarTiempoEspera(float dt){
-        tmpEsperando += dt;
-        if(tmpEsperando>tmpEspera){
+        tmpEspera -= dt;
+        System.out.println("tiempo: "+tmpEspera);
+        if(tmpEspera<=0){
             sprtActual = sprt3;
             estado = 3;
             saliendo = true;
@@ -68,6 +66,7 @@ public class Cliente {
     }
     
     public void serAtendido(float dt){
+        System.out.println("Siendo atendido");
         switch(estado){
             case 1:
                 if(x>168){
@@ -88,14 +87,18 @@ public class Cliente {
                 break;
             case 3:
                 //System.out.println(y);
-                if(y<418){
-                    y += velocidad*dt;
-                }
+                salir(dt);
                 break;
         }
     }
     
     public boolean getSalida(){
         return saliendo;
+    }
+    
+    public void salir(float dt){
+        if(y<418){
+            y += velocidad*dt;
+        }
     }
 }

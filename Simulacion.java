@@ -26,7 +26,7 @@ public class Simulacion extends JPanel{
     private int i;
     private Cliente cteActual;
     private ArrayList<Cliente> fila;        // fila de clientes esperando a ser atendidos
-    private ArrayList<Cliente> impacientes; // clientes que se salen de la fila
+    //private ArrayList<Cliente> impacientes; // clientes que se salen de la fila
     
     public Simulacion(String imgFondo){
         setLayout(new FlowLayout());
@@ -36,9 +36,9 @@ public class Simulacion extends JPanel{
         i=0;
         cteActual = new Cliente();
         fila = new ArrayList();
-        impacientes = new ArrayList();
-        fila.add(new Cliente(5f,5f));
-        fila.add(new Cliente(2,5));
+        //impacientes = new ArrayList();
+        fila.add(new Cliente(5,5));
+        fila.add(new Cliente(5,4));
     }
     
     @Override
@@ -55,6 +55,7 @@ public class Simulacion extends JPanel{
         g.setColor(new Color(255,255,255));
         g.drawRect(255, 90, 190, 150);
         cteActual.pintarCliente(g);
+        g.drawRect(300,254,50,50);
     }
     
     public synchronized void cicloPrincipalJuego()throws Exception{
@@ -65,28 +66,40 @@ public class Simulacion extends JPanel{
             tiempoViejo = tiempoNuevo;
             dibuja();
             if(!link.getEstado()){ // si está desocupado
-                cteActual = fila.get(0);
-                fila.remove(0);
-                link.setEstado(true);
+                if(fila.size()>0){
+                    cteActual = fila.get(0);
+                    fila.remove(0);
+                    link.setEstado(true);
+                    //System.out.println("tamaño de la fila: "+fila.size());
+                }
             }else{ // si está ocupado
-                cteActual.serAtendido(dt);
-                for(int n=0;n<fila.size();n++){
-                    fila.get(n).restarTiempoEspera(dt);
-                    if(fila.get(n).getSalida()){
-                        impacientes.add(fila.get(n));
-                        fila.remove(i);
+                cteActual.serAtendido(dt);    
+                int j=0;
+                while(fila.size()>0&&j<fila.size()){
+                    System.out.println("dentro del ciclo");
+                    fila.get(j).restarTiempoEspera(dt);
+                    if(fila.get(j).getSalida()){
+                        //impacientes.add(fila.get(n));
+                        System.out.println("Cliente saliendo");
+                        try{
+                        fila.remove(j);
+                        }catch(Exception e){
+                            System.out.println(e);
+                        }                  
+                       System.out.println("Cliente eliminado");
                     }
+                    j++;
                 }
             }
+            /*for(int s=0;s<impacientes.size();s++){
+                impacientes.get(s).salir(dt);
+            }*/
         }
     }
     
     private void dibuja()throws Exception{
-        SwingUtilities.invokeAndWait(new Runnable(){
-            @Override
-            public void run(){
-                repaint();
-            }
+        SwingUtilities.invokeAndWait(() -> {
+            repaint();
         });
     }
 }
