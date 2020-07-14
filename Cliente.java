@@ -66,7 +66,7 @@ public class Cliente {
     }
     
     public void serAtendido(float dt){
-        System.out.println("Siendo atendido");
+        //System.out.println("Siendo atendido");
         switch(estado){
             case 1:
                 if(x>168){
@@ -99,6 +99,12 @@ public class Cliente {
     public void salir(float dt){
         if(y<418){
             y += velocidad*dt;
+        }
+    }
+    
+    public void formarse(float dt,int lugar){
+        if(x>(300+lugar*50)){
+            x -= velocidad*dt;
         }
     }
 }
