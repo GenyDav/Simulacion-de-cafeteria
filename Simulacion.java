@@ -26,6 +26,7 @@ public class Simulacion extends JPanel{
     private float dt;                   // diferencia de tiempo para la ejecución de la simulación
     private int i,j,s;
     private Cliente cteActual;
+    private Cliente cteAtendido;
     private ArrayList<Cliente> fila;        // fila de clientes esperando a ser atendidos
     private ArrayList<Cliente> impacientes; // clientes que se salen de la fila
     
@@ -39,7 +40,8 @@ public class Simulacion extends JPanel{
         fila = new ArrayList();
         impacientes = new ArrayList();
         fila.add(new Cliente(5,5));
-        fila.add(new Cliente(5,4));
+        fila.add(new Cliente(20,4));
+        cteAtendido = null;
     }
     
     @Override
@@ -55,14 +57,18 @@ public class Simulacion extends JPanel{
         g.fillRect(255, 90, 190, 150);
         g.setColor(new Color(255,255,255));
         g.drawRect(255, 90, 190, 150);
-        cteActual.pintarCliente(g);
+        if(cteActual!=null){
+            cteActual.pintarCliente(g);
+        }
         if(fila.size()>0){
             fila.get(0).pintarCliente(g);
         }
         if(impacientes.size()>0){
             impacientes.get(0).pintarCliente(g);
         }
-       //fila.get(0).pintarCliente(g);
+        if(cteAtendido!=null){
+            cteAtendido.pintarCliente(g);
+        }
         g.drawRect(300,254,50,50);
     }
     
@@ -80,10 +86,14 @@ public class Simulacion extends JPanel{
                     link.setEstado(true);
                 }
             }else{ // si está ocupado
-                cteActual.serAtendido(dt);    
+                cteActual.serAtendido(dt); 
+                if(cteActual.getEstado()==3){ // si el cliente terminó de ser atendido
+                    link.setEstado(false); // marcar al que atiende como desocupado
+                    cteAtendido = cteActual; 
+                }
                 j=0;
                 while(fila.size()>0&&j<fila.size()){
-                    fila.get(j).formarse(dt, 0);
+                    fila.get(j).formarse(dt, j);
                     //System.out.println("dentro del ciclo");
                     fila.get(j).restarTiempoEspera(dt);
                     if(fila.get(j).getSalida()){
@@ -94,14 +104,14 @@ public class Simulacion extends JPanel{
                     j++;
                 }
             }
+            if(cteAtendido!=null){
+                cteAtendido.salir(dt); // mostrar animación del cliente que va saliendo
+            }
             s=0;
             while(impacientes.size()>0&&s<impacientes.size()){
                 impacientes.get(s).salir(dt);
                 s++;
             }
-            /*for(int s=0;s<impacientes.size();s++){
-                impacientes.get(s).salir(dt);
-            }*/
         }
     }
     

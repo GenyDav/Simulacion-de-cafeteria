@@ -91,6 +91,9 @@ public class Cliente {
                 break;
         }
     }
+    public int getEstado(){
+        return estado;
+    }
     
     public boolean getSalida(){
         return saliendo;
