@@ -25,9 +25,10 @@ public class Simulacion extends JPanel{
     private Consumidor link;            // objeto que 'atiende' a los clientes
     private float dt;                   // diferencia de tiempo para la ejecución de la simulación
     private int i,j,s;
-    private Cliente cteActual;
-    private Cliente cteAtendido;
+    private Cliente cteActual;              // cliente que está siendo atendido
+    private Cliente cteAtendido;            // cliente que ya fue atendido y que va saliendo del lugar
     private ArrayList<Cliente> fila;        // fila de clientes esperando a ser atendidos
+    //private Productora filaClientes;
     private ArrayList<Cliente> impacientes; // clientes que se salen de la fila
     
     public Simulacion(String imgFondo){
@@ -41,6 +42,7 @@ public class Simulacion extends JPanel{
         impacientes = new ArrayList();
         fila.add(new Cliente(5,5));
         fila.add(new Cliente(20,4));
+        //filaClientes = new Productora();
         cteAtendido = null;
     }
     
@@ -63,9 +65,19 @@ public class Simulacion extends JPanel{
         if(fila.size()>0){
             fila.get(0).pintarCliente(g);
         }
+        /*if(filaClientes.getNumeroClientes()>0){
+            for(int n=0;n<filaClientes.getNumeroClientes();n++){
+                filaClientes.getCliente(n).pintarCliente(g);
+            }
+        }*/
         if(impacientes.size()>0){
             impacientes.get(0).pintarCliente(g);
         }
+        /*if(impacientes.size()>0){
+            for(int m=0;m<filaClientes.getNumeroClientes();m++){
+                impacientes.get(m).pintarCliente(g);
+            }
+        }*/
         if(cteAtendido!=null){
             cteAtendido.pintarCliente(g);
         }
@@ -81,8 +93,9 @@ public class Simulacion extends JPanel{
             dibuja();   // dibujar los componentes
             if(!link.getEstado()){ // si está desocupado
                 if(fila.size()>0){
-                    cteActual = fila.get(0);
-                    fila.remove(0);
+                    //if(filaClientes.getNumeroClientes()>0){
+                    cteActual = fila.get(0); //cteActual=filaClientes.getCliente(0);
+                    fila.remove(0); // filaClientes.borrarCliente(0);
                     link.setEstado(true);
                 }
             }else{ // si está ocupado
@@ -93,6 +106,17 @@ public class Simulacion extends JPanel{
                 }
                 j=0;
                 while(fila.size()>0&&j<fila.size()){
+                    /*
+                    while(filaClientes.getNumeroClientes()>0&&j>filaClientes.getNumeroClientes()){
+                        filaClientes.getCliente(j).fomarse(dt,j);
+                        filaClientes.getCliente(j).restarTiempoEspera(dt);
+                        if(filaClientes.getCliente(j).getSalida()){
+                            impacientes.add(filaClientes.getCliente(j));
+                            filaClientes.borrarCliente(j);
+                        }
+                        j++;
+                    }
+                    */
                     fila.get(j).formarse(dt, j);
                     //System.out.println("dentro del ciclo");
                     fila.get(j).restarTiempoEspera(dt);
