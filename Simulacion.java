@@ -60,20 +60,31 @@ public class Simulacion extends JPanel{
         /*if(fila.size()>0){
             fila.get(0).pintarCliente(g);
         }*/
-        if(filaClientes.getTamFila()>0){
+        
+        int n=0;
+        while(filaClientes.getTamFila()>0&&n<filaClientes.getTamFila()){
+            filaClientes.getCliente(n).pintarCliente(g);
+            n++;
+        }
+        /*if(filaClientes.getTamFila()>0){
             for(int n=0;n<filaClientes.getTamFila();n++){
                 filaClientes.getCliente(n).pintarCliente(g);
                 System.out.println("pintando "+n);
             }
-        }
+        }*/
         /*if(impacientes.size()>0){
             impacientes.get(0).pintarCliente(g);
         }*/
-        if(impacientes.size()>0){
+        int m=0;
+        while(impacientes.size()>0&&m<impacientes.size()){
+            impacientes.get(m).pintarCliente(g);
+            m++;
+        }
+        /*if(impacientes.size()>0){
             for(int m=0;m<filaClientes.getTamFila();m++){
                 impacientes.get(m).pintarCliente(g);
             }
-        }
+        }*/
         if(cteAtendido!=null){
             cteAtendido.pintarCliente(g);
         }
