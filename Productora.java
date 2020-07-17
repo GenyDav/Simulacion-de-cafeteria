@@ -17,18 +17,19 @@ public class Productora extends Thread{
     }
     
     synchronized public void agregarCliente(){
-        fila.add(new Cliente(round(random()*20+1),round(random()*9+2)));
+        fila.add(new Cliente(round(random()*20+1),round(random()*11+5)));
+        System.out.println("fila: "+fila.size());
     } 
     
     synchronized public void borrarCliente(int cliente){
         fila.remove(cliente);
     }
     
-    synchronized public Cliente getCliente(int cliente){
+    public Cliente getCliente(int cliente){
         return fila.get(cliente);
     }
     
-    public int getNumeroClientes(){
+    public int getTamFila(){
         return fila.size();
     }
     
@@ -36,11 +37,10 @@ public class Productora extends Thread{
     public void run(){
         while(true){
             try{
-                Thread.sleep(1000);           
-            }catch(InterruptedException e){}
-            finally{
+                Thread.sleep(3000); 
                 agregarCliente();
-            }
+                System.out.println("creando cliente...");
+            }catch(InterruptedException e){}
         }
     }
 }

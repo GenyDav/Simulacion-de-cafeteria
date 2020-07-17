@@ -57,7 +57,7 @@ public class Cliente {
     
     public void restarTiempoEspera(float dt){
         tmpEspera -= dt;
-        System.out.println("tiempo: "+tmpEspera);
+        //System.out.println("tiempo: "+tmpEspera);
         if(tmpEspera<=0){
             sprtActual = sprt3;
             estado = 3;
@@ -79,7 +79,7 @@ public class Cliente {
                 break;
             case 2:
                 transcurrido += dt;
-                System.out.println(transcurrido);
+                //System.out.println(transcurrido);
                 if(transcurrido>tPedido){
                     sprtActual = sprt3;
                     estado = 3;
@@ -91,6 +91,7 @@ public class Cliente {
                 break;
         }
     }
+    
     public int getEstado(){
         return estado;
     }

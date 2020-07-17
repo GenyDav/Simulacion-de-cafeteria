@@ -16,7 +16,7 @@ public class Main {
         JFrame frame = new JFrame("Simulación café");
         Simulacion s = new Simulacion("cafeteria/sprites/fondo.png");           
         frame.add(s);
-        frame.setResizable(false);
+        frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);  
