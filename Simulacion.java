@@ -117,15 +117,15 @@ public class Simulacion extends JPanel{
                 j=0;
                 //while(fila.size()>0&&j<fila.size()){
                     
-                    while(filaClientes.getTamFila()>0&&j<filaClientes.getTamFila()){
-                        filaClientes.getCliente(j).formarse(dt,j);
-                        filaClientes.getCliente(j).restarTiempoEspera(dt);
-                        if(filaClientes.getCliente(j).getSalida()){
-                            impacientes.add(filaClientes.getCliente(j));
-                            filaClientes.borrarCliente(j);
-                        }
-                        j++;
+                while(filaClientes.getTamFila()>0&&j<filaClientes.getTamFila()){
+                    filaClientes.getCliente(j).formarse(dt,j);
+                    filaClientes.getCliente(j).restarTiempoEspera(dt);
+                    if(filaClientes.getCliente(j).getSalida()){
+                        impacientes.add(filaClientes.getCliente(j));
+                        filaClientes.borrarCliente(j);
                     }
+                    j++;
+                }
                     
                 /*    fila.get(j).formarse(dt, j);
                     //System.out.println("dentro del ciclo");
