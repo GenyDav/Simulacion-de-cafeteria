@@ -13,9 +13,9 @@ public class Cliente {
     private int estado;
     private float velocidad;
     private BufferedImage sprt1,sprt2,sprt3,sprtActual; //sprites del personaje
-    private float tPedido; // tiempo que tardará el pedido del cliente (segundos)
-    private float transcurrido;
-    private float tmpEspera; // tiempo que el cliente puede esperar en la fila
+    private double tPedido; // tiempo que tardará el pedido del cliente (segundos)
+    private double transcurrido;
+    private double tmpEspera; // tiempo que el cliente puede esperar en la fila
     private boolean saliendo;
     
     public Cliente(){
@@ -34,7 +34,7 @@ public class Cliente {
         saliendo = false;
     }
     
-    public Cliente(float tmpEspera,float tPedido){
+    public Cliente(double tmpEspera,double tPedido){
         sprt1 = Imagen.cargaImagen("cafeteria/sprites/lady5.png");
         sprt2 = Imagen.cargaImagen("cafeteria/sprites/lady9.png");
         sprt3 = Imagen.cargaImagen("cafeteria/sprites/lady4.png");
