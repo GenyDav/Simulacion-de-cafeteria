@@ -32,13 +32,13 @@ public class Simulacion extends JPanel{
         fondo = Imagen.cargaImagen(imgFondo);
         link = new Consumidor();
         i=0;
-        cteActual = new Cliente();
         //fila = new ArrayList();
         impacientes = new ArrayList();
         //fila.add(new Cliente(5,5));
         //fila.add(new Cliente(20,4));
         filaClientes = new Productora();
         cteAtendido = null;
+        cteActual = null;
     }
     
     @Override
@@ -57,9 +57,6 @@ public class Simulacion extends JPanel{
         if(cteActual!=null){
             cteActual.pintarCliente(g);
         }
-        /*if(fila.size()>0){
-            fila.get(0).pintarCliente(g);
-        }*/
         
         int n=0;
         while(filaClientes.getTamFila()>0&&n<filaClientes.getTamFila()){
@@ -100,12 +97,10 @@ public class Simulacion extends JPanel{
             tiempoViejo = tiempoNuevo;
             dibuja();   // dibujar los componentes
             if(!link.getEstado()){ // si está desocupado
-                //if(fila.size()>0){
-                    if(filaClientes.getTamFila()>0){
-                    //cteActual = fila.get(0);
-                    cteActual=filaClientes.getCliente(0);
-                    //fila.remove(0);
+                if(filaClientes.getTamFila()>0){
+                    cteActual = filaClientes.getCliente(0);
                     filaClientes.borrarCliente(0);
+                    
                     link.setEstado(true);
                 }
             }else{ // si está ocupado
@@ -115,8 +110,6 @@ public class Simulacion extends JPanel{
                     cteAtendido = cteActual; 
                 }
                 j=0;
-                //while(fila.size()>0&&j<fila.size()){
-                    
                 while(filaClientes.getTamFila()>0&&j<filaClientes.getTamFila()){
                     filaClientes.getCliente(j).formarse(dt,j);
                     filaClientes.getCliente(j).restarTiempoEspera(dt);
@@ -126,17 +119,6 @@ public class Simulacion extends JPanel{
                     }
                     j++;
                 }
-                    
-                /*    fila.get(j).formarse(dt, j);
-                    //System.out.println("dentro del ciclo");
-                    fila.get(j).restarTiempoEspera(dt);
-                    if(fila.get(j).getSalida()){
-                        impacientes.add(fila.get(j));             
-                        fila.remove(j);                                     
-                        System.out.println("Cliente eliminado");
-                    }
-                    j++;
-                }*/
             }
             if(cteAtendido!=null){
                 cteAtendido.salir(dt); // mostrar animación del cliente que va saliendo

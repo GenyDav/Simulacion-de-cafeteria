@@ -18,7 +18,7 @@ public class Productora extends Thread{
     
     synchronized public void agregarCliente(){
         fila.add(new Cliente(round(random()*20+1),round(random()*11+5),(int)(Math.random()*15+1)));
-        System.out.println("fila: "+fila.size());
+        //System.out.println("fila: "+fila.size());
     } 
     
     synchronized public void borrarCliente(int cliente){
@@ -38,8 +38,8 @@ public class Productora extends Thread{
         while(true){
             try{
                 Thread.sleep(3000); 
-                agregarCliente();
                 System.out.println("creando cliente...");
+                agregarCliente();
             }catch(InterruptedException e){}
         }
     }
