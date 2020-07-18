@@ -22,7 +22,7 @@ public class Simulacion extends JPanel{
     private int i,j,s;
     private Cliente cteActual;              // cliente que está siendo atendido
     private Cliente cteAtendido;            // cliente que ya fue atendido y que va saliendo del lugar
-    //private ArrayList<Cliente> fila;        // fila de clientes esperando a ser atendidos
+    //private ArrayList<Cliente> fila;      // fila de clientes esperando a ser atendidos
     private Productora filaClientes;
     private ArrayList<Cliente> impacientes; // clientes que se salen de la fila
     

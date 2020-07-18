@@ -17,7 +17,7 @@ public class Productora extends Thread{
     }
     
     synchronized public void agregarCliente(){
-        fila.add(new Cliente(round(random()*20+1),round(random()*11+5)));
+        fila.add(new Cliente(round(random()*20+1),round(random()*11+5),(int)(Math.random()*15+1)));
         System.out.println("fila: "+fila.size());
     } 
     

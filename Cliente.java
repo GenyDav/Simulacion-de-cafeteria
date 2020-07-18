@@ -21,6 +21,8 @@ public class Cliente {
     private double tmpAux;          // variables usada para la barra de progreso de tiempo en la fila
     private double porcentaje, porcentajePedido;
     private boolean saliendo;
+    private boolean atendido;
+    
     
     public Cliente(){
         sprt1 = Imagen.cargaImagen("cafeteria/sprites/lady5.png");
@@ -38,7 +40,7 @@ public class Cliente {
         saliendo = false;
     }
     
-    public Cliente(double tmpEspera,double tPedido){
+    public Cliente(double tmpEspera,double tPedido,int plato){
         sprt1 = Imagen.cargaImagen("cafeteria/sprites/lady5.png");
         sprt2 = Imagen.cargaImagen("cafeteria/sprites/lady9.png");
         sprt3 = Imagen.cargaImagen("cafeteria/sprites/lady4.png");
@@ -55,6 +57,8 @@ public class Cliente {
         saliendo = false;
         porcentaje = 0;
         porcentajePedido = 0;
+        pedido = Imagen.cargaImagen("cafeteria/sprites/plato"+plato+".png");
+        atendido = false;
     }
     
     public void pintarCliente(Graphics g){
@@ -70,6 +74,14 @@ public class Cliente {
             g.fillRect(Math.round(x),Math.round(y-80),40,5);
             g.setColor(Color.RED);
             g.fillRect(Math.round(x),Math.round(y-80),(int)Math.round(porcentajePedido*40),5);
+            g.drawImage(pedido,Math.round(x+3),Math.round(y-105),null);
+        }else if(estado==3){
+            if(atendido){
+                g.drawImage(pedido,Math.round(x+3),Math.round(y-20),null);
+            }else if(saliendo){
+                g.setColor(Color.WHITE);
+                g.drawString("¡Me voy!", Math.round(x), Math.round(y-10));
+            }
         }
     }
     
@@ -104,8 +116,9 @@ public class Cliente {
                     sprtActual = sprt3;
                     estado = 3;
                 }
+                atendido = true;
                 break;
-            case 3:
+            case 3: // saliendo del lugar
                 //System.out.println(y);
                 salir(dt);
                 break;
