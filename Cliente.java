@@ -23,6 +23,7 @@ public class Cliente {
     private double porcentaje, porcentajePedido;
     private boolean saliendo;
     private boolean atendido;
+    private boolean terminado;
     
     
     public Cliente(){
@@ -64,6 +65,7 @@ public class Cliente {
         porcentajePedido = 0;
         pedido = Imagen.cargaImagen("cafeteria/sprites/plato"+plato+".png");
         atendido = false;
+        terminado = false;
     }
     
     public void pintarCliente(Graphics g){
@@ -134,6 +136,10 @@ public class Cliente {
                 break;
         }
     }
+
+    public boolean getTerminado() {
+        return terminado;
+    }
     
     public int getEstado(){
         return estado;
@@ -144,7 +150,7 @@ public class Cliente {
     }
     
     public void salir(float dt){
-        if(y<418){
+        if(y<438){
             y += velocidad*dt;
             sprtActual = Imagen.cargaImagen("cafeteria/sprites/lady"+(int)spSalida+".png");
             //System.out.println("conteo:"+spSalida);
@@ -153,6 +159,9 @@ public class Cliente {
                 spSalida = 1;
             }
         }    
+        else{
+            terminado = true;
+        }
     }
     
     public void formarse(float dt,int lugar){
@@ -167,13 +176,6 @@ public class Cliente {
             }
         }else{
             sprtActual = Imagen.cargaImagen("cafeteria/sprites/lady_3.png");
-        }
-    }
-    
-    public void setSprite(int sprite){
-        this.sprite = sprite;
-        if(estado==1){
-            
         }
     }
 }
