@@ -3,6 +3,7 @@ package cafeteria;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import javax.swing.SwingUtilities;
  * @author Geny
  */
 public class Simulacion extends JPanel{
-    private final int PX_ANCHO = 600;   // ancho del lienzo
+    private final int PX_ANCHO = 550;   // ancho del lienzo
     private final int PX_ALTO = 418;    // alto del lienzo 
     private BufferedImage fondo;        // imágen de fondo
     private Consumidor link;            // objeto que 'atiende' a los clientes
@@ -25,6 +26,7 @@ public class Simulacion extends JPanel{
     private Productora filaClientes;        // fila de clientes esperando a ser atendidos
     private ArrayList<Cliente> impacientes; // clientes que se salen de la fila
     private int total,atendidos,perdidos;   // conteo de clientes
+    private Font fEstadisticas,fClientes;   // fuentes para mostrar las estadísticas y los mensajes de los clientes
     
     public Simulacion(String imgFondo){
         setLayout(new FlowLayout());
@@ -39,6 +41,8 @@ public class Simulacion extends JPanel{
         total = 0;
         atendidos = 0;
         perdidos = 0;
+        fEstadisticas = new Font("Arial", Font.PLAIN, 18);
+        fClientes = getFont();
     }
     
     @Override
@@ -57,7 +61,15 @@ public class Simulacion extends JPanel{
         if(cteActual!=null){
             cteActual.pintarCliente(g);
         }
+        g.setColor(Color.BLACK);
+        g.setFont(fEstadisticas);
+        g.drawString("Atendidos: "+atendidos,260,90);
+        g.drawString("Perdidos: "+perdidos,260,110);
+        g.drawString("En espera: "+filaClientes.getTamFila(),260,130);
+        g.drawString("Total: "+(atendidos+perdidos),260,140);
         
+        g.setFont(fClientes);
+        g.setColor(Color.WHITE);
         int n=0;
         while(filaClientes.getTamFila()>0&&n<filaClientes.getTamFila()){
             filaClientes.getCliente(n).pintarCliente(g);
@@ -89,13 +101,13 @@ public class Simulacion extends JPanel{
                     cteActual = filaClientes.getCliente(0);
                     filaClientes.borrarCliente(0);                  
                     link.setEstado(true);
-                    atendidos++;
                 }
             }else{ // si está ocupado
                 cteActual.serAtendido(dt); 
                 if(cteActual.getEstado()==3){ // si el cliente terminó de ser atendido
                     link.setEstado(false); // marcar al que atiende como desocupado
                     cteAtendido = cteActual; 
+                    atendidos++;
                 }
                 j=0;
                 while(filaClientes.getTamFila()>0&&j<filaClientes.getTamFila()){
@@ -115,8 +127,8 @@ public class Simulacion extends JPanel{
             while(impacientes.size()>0&&s<impacientes.size()){
                 impacientes.get(s).salir(dt);
                 if(impacientes.get(s).getTerminado()){ // como el cliente ya salió del lugar, se elimina de la lista
-                    impacientes.remove(s);
                     perdidos++;
+                    impacientes.remove(s);
                 }
                 s++;
             }
