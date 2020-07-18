@@ -25,7 +25,7 @@ public class Simulacion extends JPanel{
     private Cliente cteAtendido;            // cliente que ya fue atendido y que va saliendo del lugar
     private Productora filaClientes;        // fila de clientes esperando a ser atendidos
     private ArrayList<Cliente> impacientes; // clientes que se salen de la fila
-    private int total,atendidos,perdidos;   // conteo de clientes
+    private int atendidos,perdidos;   // conteo de clientes
     private Font fEstadisticas,fClientes;   // fuentes para mostrar las estadísticas y los mensajes de los clientes
     
     public Simulacion(String imgFondo){
@@ -38,10 +38,9 @@ public class Simulacion extends JPanel{
         filaClientes = new Productora();
         cteAtendido = null;
         cteActual = null;
-        total = 0;
         atendidos = 0;
         perdidos = 0;
-        fEstadisticas = new Font("Arial", Font.PLAIN, 18);
+        fEstadisticas = new Font("Comic Sans",Font.PLAIN,14);
         fClientes = getFont();
     }
     
@@ -53,23 +52,18 @@ public class Simulacion extends JPanel{
         if(i>1000){
             i=0;
         }
-        Color myColour = new Color(255, 255,255,150); // 127, 50%
-        g.setColor(myColour);
-        g.fillRect(255, 90, 190, 150);
-        g.setColor(new Color(255,255,255));
-        g.drawRect(255, 90, 190, 150);
+        //Color myColour = new Color(255, 255,255,150); // 127, 50%
         if(cteActual!=null){
             cteActual.pintarCliente(g);
         }
-        g.setColor(Color.BLACK);
+        g.setColor(Color.WHITE);
         g.setFont(fEstadisticas);
-        g.drawString("Atendidos: "+atendidos,260,90);
-        g.drawString("Perdidos: "+perdidos,260,110);
-        g.drawString("En espera: "+filaClientes.getTamFila(),260,130);
-        g.drawString("Total: "+(atendidos+perdidos),260,140);
+        g.drawString("Atendidos: "+atendidos,300,88);
+        g.drawString("Perdidos: "+perdidos,300,108);
+        g.drawString("En espera: "+filaClientes.getTamFila(),300,128);
+        g.drawString("Total: "+filaClientes.getTotal(),300,148);
         
         g.setFont(fClientes);
-        g.setColor(Color.WHITE);
         int n=0;
         while(filaClientes.getTamFila()>0&&n<filaClientes.getTamFila()){
             filaClientes.getCliente(n).pintarCliente(g);

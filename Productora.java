@@ -10,14 +10,17 @@ import static java.lang.Math.round;
  */
 public class Productora extends Thread{
     private volatile ArrayList<Cliente> fila;
+    private volatile int total;         // número de clientes creados
     
     public Productora(){
         super("Clase productora"); 
         fila = new ArrayList();
+        total = 0;
     }
     
     synchronized public void agregarCliente(){
         fila.add(new Cliente(round(random()*20+1),round(random()*11+5),(int)(Math.random()*15+1)));
+        total++;
         //System.out.println("fila: "+fila.size());
     } 
     
@@ -31,6 +34,10 @@ public class Productora extends Thread{
     
     public int getTamFila(){
         return fila.size();
+    }
+    
+    public int getTotal(){
+        return total;
     }
     
     @Override
