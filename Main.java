@@ -13,7 +13,7 @@ import javax.swing.JFrame;
  */
 public class Main {
     public static void main(String []args){
-        JFrame frame = new JFrame("Simulación café");
+        JFrame frame = new JFrame("Cafetería");
         Simulacion s = new Simulacion("cafeteria/sprites/fondo.png");           
         frame.add(s);
         frame.setResizable(true);

@@ -40,7 +40,7 @@ public class Simulacion extends JPanel{
         cteActual = null;
         atendidos = 0;
         perdidos = 0;
-        fEstadisticas = new Font("Comic Sans",Font.PLAIN,14);
+        fEstadisticas = new Font("Comic Sans MS",Font.PLAIN,14);
         fClientes = getFont();
     }
     
@@ -79,7 +79,7 @@ public class Simulacion extends JPanel{
         if(cteAtendido!=null){
             cteAtendido.pintarCliente(g);
         }
-        g.drawRect(300,254,50,50);
+        //g.drawRect(300,254,50,50);
     }
     
     public synchronized void cicloPrincipalJuego()throws Exception{

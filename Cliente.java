@@ -9,8 +9,8 @@ import java.awt.image.BufferedImage;
  * @author Geny
  */
 public class Cliente {
-    private float x,y;  // coordenadas del sprite
-    private int sprite;
+    private float x,y;      // coordenadas del sprite
+    private int cliente;    // tipo de cliente
     private int estado;
     private float velocidad;
     private BufferedImage sprt1,sprt2,sprt3,sprtActual;  //sprites del personaje
@@ -31,7 +31,6 @@ public class Cliente {
         sprt2 = Imagen.cargaImagen("cafeteria/sprites/lady9.png");
         spSalida = 1;
         sprtActual = sprt1;
-        sprite = 1;
         x = 550;
         y = 254;
         velocidad = 80;
@@ -46,12 +45,11 @@ public class Cliente {
         atendido = false;
     }
     
-    public Cliente(double tmpEspera,double tPedido,int plato){
-        sprt1 = Imagen.cargaImagen("cafeteria/sprites/lady_1.png");
-        sprt2 = Imagen.cargaImagen("cafeteria/sprites/lady9.png");
+    public Cliente(double tmpEspera,double tPedido,int plato,int cliente){
+        sprt1 = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"_1.png");
+        sprt2 = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"9.png");
         spSalida = 1;
         sprtActual = sprt1;
-        sprite = 1;
         x = 550;
         y = 254;
         velocidad = 80;
@@ -64,13 +62,13 @@ public class Cliente {
         porcentaje = 0;
         porcentajePedido = 0;
         pedido = Imagen.cargaImagen("cafeteria/sprites/plato"+plato+".png");
+        this.cliente = cliente; 
         atendido = false;
         terminado = false;
     }
     
     public void pintarCliente(Graphics g){
         g.drawImage(sprtActual,Math.round(x),Math.round(y),null);
-        //g.drawString("algo", Math.round(x), Math.round(y-20));
         if(estado<2){ // mostrar barra de tiempo restante de espera
             g.setColor(Color.WHITE);
             g.fillRect(Math.round(x),Math.round(y-10),40,5);
@@ -109,8 +107,7 @@ public class Cliente {
             case 1:
                 if(x>168){
                     x -= velocidad*dt;
-                    //System.out.println(dt);
-                    sprtActual = Imagen.cargaImagen("cafeteria/sprites/lady_"+(int)spSalida+".png");
+                    sprtActual = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"_"+(int)spSalida+".png");
                     spSalida += 0.1;
                     if(spSalida>5){
                         spSalida = 1;
@@ -123,9 +120,7 @@ public class Cliente {
             case 2:
                 transcurrido += dt;
                 porcentajePedido = transcurrido/tPedido;
-                //System.out.println(transcurrido);
                 if(transcurrido>tPedido){
-                    //sprtActual = sprt3;
                     estado = 3;
                 }
                 atendido = true;
@@ -152,7 +147,7 @@ public class Cliente {
     public void salir(float dt){
         if(y<438){
             y += velocidad*dt;
-            sprtActual = Imagen.cargaImagen("cafeteria/sprites/lady"+(int)spSalida+".png");
+            sprtActual = Imagen.cargaImagen("cafeteria/sprites/"+cliente+(int)spSalida+".png");
             //System.out.println("conteo:"+spSalida);
             spSalida += 0.1;
             if(spSalida>5){
@@ -167,15 +162,14 @@ public class Cliente {
     public void formarse(float dt,int lugar){
         if(x>(300+lugar*60)){
             x -= velocidad*dt;
-            
-            sprtActual = Imagen.cargaImagen("cafeteria/sprites/lady_"+(int)spSalida+".png");
-            System.out.println("conteo:"+spSalida);
+            sprtActual = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"_"+(int)spSalida+".png");
+            //System.out.println("conteo:"+spSalida);
             spSalida += 0.1;
             if(spSalida>5){
                 spSalida = 1;
             }
         }else{
-            sprtActual = Imagen.cargaImagen("cafeteria/sprites/lady_3.png");
+            sprtActual = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"_3.png");
         }
     }
 }
