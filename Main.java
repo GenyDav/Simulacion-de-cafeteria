@@ -9,14 +9,15 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Geny
+ * @author Geny Dávila
+ * @version 2.1 
  */
 public class Main {
     public static void main(String []args){
         JFrame frame = new JFrame("Cafetería");
         Simulacion s = new Simulacion("cafeteria/sprites/fondo.png");           
         frame.add(s);
-        frame.setResizable(true);
+        ///frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);  
@@ -25,7 +26,7 @@ public class Main {
         try{
             s.cicloPrincipalJuego();
         }catch(Exception e){
-            
+            System.out.println(e.getMessage());
         }
     }
 }

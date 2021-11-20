@@ -11,16 +11,16 @@ import java.awt.image.BufferedImage;
 public class Cliente {
     private float x,y;      // coordenadas del sprite
     private int cliente;    // tipo de cliente
-    private int estado;
+    public int estado;
     private float velocidad;
     private BufferedImage sprt1,sprt2,sprt3,sprtActual;  //sprites del personaje
     private BufferedImage pedido;   // sprite del pedido del cliente
     private double spSalida;
     private double tPedido;         // tiempo que tardará el pedido del cliente (segundos)
     private double transcurrido;
-    private double tmpEspera;       // tiempo que el cliente puede esperar en la fila
+    public double tmpEspera;       // tiempo que el cliente puede esperar en la fila
     private double tmpAux;          // variables usada para la barra de progreso de tiempo en la fila
-    private double porcentaje, porcentajePedido;
+    public double porcentaje, porcentajePedido;
     private boolean saliendo;
     private boolean atendido;
     private boolean terminado;
@@ -39,7 +39,7 @@ public class Cliente {
         this.tmpEspera = 0;
         transcurrido = 0;
         saliendo = false;
-        porcentaje = 0;
+        porcentaje = 1.0;
         porcentajePedido = 0;
         //pedido = Imagen.cargaImagen("cafeteria/sprites/plato"+plato+".png");
         atendido = false;
@@ -59,7 +59,7 @@ public class Cliente {
         tmpAux = tmpEspera;
         transcurrido = 0;
         saliendo = false;
-        porcentaje = 0;
+        porcentaje = 1.0;
         porcentajePedido = 0;
         pedido = Imagen.cargaImagen("cafeteria/sprites/plato"+plato+".png");
         this.cliente = cliente; 
