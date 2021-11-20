@@ -16,14 +16,15 @@ public class Cliente {
     private BufferedImage sprt1,sprt2,sprt3,sprtActual;  //sprites del personaje
     private BufferedImage pedido;   // sprite del pedido del cliente
     private double spSalida;
-    private double tPedido;         // tiempo que tardará el pedido del cliente (segundos)
+    double tPedido;         // tmpPedido que tardará el pedido del cliente (segundos)
     private double transcurrido;
-    public double tmpEspera;       // tiempo que el cliente puede esperar en la fila
-    private double tmpAux;          // variables usada para la barra de progreso de tiempo en la fila
+    public double tmpEspera;       // tmpPedido que el cliente puede esperar en la fila
+    private double tmpAux;          // variables usada para la barra de progreso de tmpPedido en la fila
     public double porcentaje, porcentajePedido;
     private boolean saliendo;
     private boolean atendido;
     private boolean terminado;
+    int plato;
     
     
     public Cliente(){
@@ -65,21 +66,22 @@ public class Cliente {
         this.cliente = cliente; 
         atendido = false;
         terminado = false;
+        this.plato = plato;
     }
     
     public void pintarCliente(Graphics g){
         g.drawImage(sprtActual,Math.round(x),Math.round(y),null);
-        if(estado<2){ // mostrar barra de tiempo restante de espera
+        if(estado<2){ // mostrar barra de tmpPedido restante de espera
             g.setColor(Color.WHITE);
             g.fillRect(Math.round(x),Math.round(y-10),40,5);
             g.setColor(Color.BLUE);
             g.fillRect(Math.round(x),Math.round(y-10), (int)Math.round(porcentaje*40),5);
         }else if(estado==2){ // mostrar una barra de progreso en el pedido
-            g.setColor(Color.WHITE);
+            /*g.setColor(Color.WHITE);
             g.fillRect(Math.round(x),Math.round(y-80),40,5);
             g.setColor(Color.RED);
-            g.fillRect(Math.round(x),Math.round(y-80),(int)Math.round(porcentajePedido*40),5);
-            g.drawImage(pedido,Math.round(x+3),Math.round(y-105),null);
+            g.fillRect(Math.round(x),Math.round(y-80),(int)Math.round(porcentajePedido*40),5);*/
+            //g.drawImage(pedido,Math.round(x+3),Math.round(y-105),null);
         }else if(estado==3){
             if(atendido){
                 g.drawImage(pedido,Math.round(x+3),Math.round(y-20),null);
@@ -93,7 +95,7 @@ public class Cliente {
     public void restarTiempoEspera(float dt){
         tmpEspera -= dt;
         porcentaje = tmpEspera/tmpAux;
-        //System.out.println("tiempo: "+tmpEspera);
+        //System.out.println("tmpPedido: "+tmpEspera);
         if(tmpEspera<=0){
             sprtActual = sprt3;
             estado = 3;
@@ -115,14 +117,17 @@ public class Cliente {
                 }else{
                     sprtActual = sprt2;
                     estado = 2;
+                    Consumidor.cocinando = true;
                 }
                 break;
             case 2:
-                transcurrido += dt;
+                //Consumidor.cocinando = true;
+                /*transcurrido += dt;
                 porcentajePedido = transcurrido/tPedido;
                 if(transcurrido>tPedido){
                     estado = 3;
-                }
+                    Consumidor.cocinando = false;
+                }*/
                 atendido = true;
                 break;
             case 3: // saliendo del lugar
@@ -138,6 +143,10 @@ public class Cliente {
     
     public int getEstado(){
         return estado;
+    }
+    
+    public void setEstado(int estado){
+        this.estado = estado;
     }
     
     public boolean getSalida(){
@@ -159,7 +168,7 @@ public class Cliente {
         }
     }
     
-    public void formarse(float dt,int lugar){
+    public void avanzarFila(float dt,int lugar){
         if(x>(300+lugar*60)){
             x -= velocidad*dt;
             sprtActual = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"_"+(int)spSalida+".png");

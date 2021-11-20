@@ -5,6 +5,7 @@
  */
 package cafeteria;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -17,6 +18,13 @@ public class Consumidor {
     private int sprite;
     private BufferedImage sprt1,sprt2,sprt3; //sprites del personaje
     boolean ocupado;
+    static boolean cocinando;
+    int plato;
+    double tmpPedido; // tmpPedido que toma preparar el pedido
+    double transcurrido;
+    double porcentajePedido;
+    Cliente cliente;
+    BufferedImage pedido;
     
     public Consumidor(){
         sprt1 = Imagen.cargaImagen("cafeteria/sprites/chef1.png");
@@ -26,9 +34,23 @@ public class Consumidor {
         x = 168;
         y = 184;
         ocupado = false; // cuando está desocupado es false
+        cocinando = false;
+        plato = 0;
+        tmpPedido = 0;
+        transcurrido = 0;
+        porcentajePedido = 0;
     }
     
     public void pintarConsumidor(Graphics g){
+        if(cocinando){
+            g.setColor(Color.WHITE);
+            g.drawString("Cocinando", 168, 184);
+            g.drawImage(pedido,100, 100, null);
+            g.setColor(Color.WHITE);
+            g.fillRect(Math.round(x),Math.round(y-80),40,5);
+            g.setColor(Color.RED);
+            g.fillRect(Math.round(x),Math.round(y-80),(int)Math.round(porcentajePedido*40),5);
+        }
         switch(sprite){
             case 7:
                 g.drawImage(sprt2,x,y,null);
@@ -43,6 +65,26 @@ public class Consumidor {
                 g.drawImage(sprt1,x,y,null);
                 break;
         }
+    }
+    
+    public void tomarPedido(Cliente cte){
+        this.cliente = cte;
+        this.plato = cte.plato;
+        this.tmpPedido = cte.tPedido;
+        ocupado = true;
+        pedido = Imagen.cargaImagen("cafeteria/sprites/plato"+plato+".png");
+        transcurrido = 0;
+    }
+    
+    public void atenderCliente(float dt){
+        //cliente.serAtendido(dt); 
+        porcentajePedido = transcurrido/tmpPedido;
+        if(transcurrido>tmpPedido){
+            cliente.setEstado(3);
+            cocinando = false;
+        }
+        transcurrido += dt;
+        System.out.println(porcentajePedido);
     }
     
     public boolean getEstado(){

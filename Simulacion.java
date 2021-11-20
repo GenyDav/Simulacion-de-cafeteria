@@ -59,7 +59,7 @@ public class Simulacion extends JPanel{
         if(cteActual!=null){
             cteActual.pintarCliente(g);
             //System.out.println(cteActual.tmpEspera);
-            System.out.println(cteActual.porcentaje);
+            //System.out.println(cteActual.porcentaje);
         }
         g.setColor(Color.WHITE);
         g.setFont(fEstadisticas);
@@ -99,10 +99,13 @@ public class Simulacion extends JPanel{
                 if(filaClientes.getTamFila()>0){
                     cteActual = filaClientes.getCliente(0);
                     filaClientes.borrarCliente(0);                  
-                    link.setEstado(true);
+                    //link.setEstado(true);
+                    link.tomarPedido(cteActual);
                 }
             }else{ // si está ocupado
                 cteActual.serAtendido(dt); 
+                if(cteActual.getEstado()==2)
+                    link.atenderCliente(dt);
                 if(cteActual.getEstado()==3){   // si el cliente terminó de ser atendido
                     link.setEstado(false);      // marcar al que atiende como desocupado
                     cteAtendido = cteActual; 
@@ -110,7 +113,7 @@ public class Simulacion extends JPanel{
                 }
                 j=0;
                 while(filaClientes.getTamFila()>0&&j<filaClientes.getTamFila()){
-                    filaClientes.getCliente(j).formarse(dt,j);
+                    filaClientes.getCliente(j).avanzarFila(dt,j);
                     filaClientes.getCliente(j).restarTiempoEspera(dt);
                     if(filaClientes.getCliente(j).getSalida()){
                         impacientes.add(filaClientes.getCliente(j));
