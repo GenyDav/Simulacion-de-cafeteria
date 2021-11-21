@@ -19,7 +19,7 @@ public class Productora extends Thread{
     }
     
     synchronized public void agregarCliente(){
-        fila.add(new Cliente(round(random()*20+1),round(random()*11+5),(int)(Math.random()*15+1),(int)(Math.random()*4+1)));
+        fila.add(new Cliente(round(random()*20+1),(int)(Math.random()*15+1),(int)(Math.random()*4+1)));
         //System.out.println("Agregado a la fila: "+fila.get(0).tmpEspera);
         total++;
         try{

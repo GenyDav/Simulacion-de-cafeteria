@@ -6,15 +6,27 @@
 package cafeteria;
 
 import java.awt.image.BufferedImage;
+import static java.lang.Math.random;
+import static java.lang.Math.round;
 
 /**
  *
  * @author Geny
  */
 public class Pedido {
-    BufferedImage sprite;
-    double tmpPedido;
-    int numPlato;
+    private BufferedImage sprite;
+    private double tmpPedido;
     
+    public Pedido(int numPedido){
+        sprite = Imagen.cargaImagen("cafeteria/sprites/plato"+numPedido+".png");
+        tmpPedido = round(random()*11+5);
+    }
     
+    public double getTmpPedido(){
+        return tmpPedido;
+    }
+    
+    public BufferedImage getSprite(){
+        return sprite;
+    }
 }

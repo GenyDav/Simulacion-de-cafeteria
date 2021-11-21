@@ -19,12 +19,13 @@ public class Consumidor {
     private BufferedImage sprt1,sprt2,sprt3; //sprites del personaje
     boolean ocupado;
     static boolean cocinando;
-    int plato;
-    double tmpPedido; // tmpPedido que toma preparar el pedido
+    //int plato;
+    //double tmpPedido; // tmpPedido que toma preparar el pedido
     double transcurrido;
     double porcentajePedido;
     Cliente cliente;
-    BufferedImage pedido;
+    //BufferedImage pedido;
+    Pedido p;
     
     public Consumidor(){
         sprt1 = Imagen.cargaImagen("cafeteria/sprites/chef1.png");
@@ -35,21 +36,22 @@ public class Consumidor {
         y = 184;
         ocupado = false; // cuando está desocupado es false
         cocinando = false;
-        plato = 0;
-        tmpPedido = 0;
+        //plato = 0;
+        //tmpPedido = 0;
         transcurrido = 0;
         porcentajePedido = 0;
+        p = null;
     }
     
     public void pintarConsumidor(Graphics g){
         if(cocinando){
             g.setColor(Color.WHITE);
-            g.drawString("Cocinando", 168, 184);
-            g.drawImage(pedido,100, 100, null);
+            g.drawString("Cocinando", x-10, y-40);
+            g.drawImage(p.getSprite(),Math.round(x+3),Math.round(y-35), null);
             g.setColor(Color.WHITE);
-            g.fillRect(Math.round(x),Math.round(y-80),40,5);
+            g.fillRect(Math.round(x),Math.round(y-10),40,5);
             g.setColor(Color.RED);
-            g.fillRect(Math.round(x),Math.round(y-80),(int)Math.round(porcentajePedido*40),5);
+            g.fillRect(Math.round(x),Math.round(y-10),(int)Math.round(porcentajePedido*40),5);
         }
         switch(sprite){
             case 7:
@@ -69,19 +71,21 @@ public class Consumidor {
     
     public void tomarPedido(Cliente cte){
         this.cliente = cte;
-        this.plato = cte.plato;
-        this.tmpPedido = cte.tPedido;
+        //this.plato = cte.plato;
+        //this.tmpPedido = cte.tPedido;
         ocupado = true;
-        pedido = Imagen.cargaImagen("cafeteria/sprites/plato"+plato+".png");
+        //pedido = Imagen.cargaImagen("cafeteria/sprites/plato"+plato+".png");
         transcurrido = 0;
+        p = new Pedido(cte.hacerPedido());
     }
     
     public void atenderCliente(float dt){
         //cliente.serAtendido(dt); 
-        porcentajePedido = transcurrido/tmpPedido;
-        if(transcurrido>tmpPedido){
+        porcentajePedido = transcurrido/p.getTmpPedido();
+        if(transcurrido>p.getTmpPedido()){
             cliente.setEstado(3);
             cocinando = false;
+            cliente.recibirPlato(p);
         }
         transcurrido += dt;
         System.out.println(porcentajePedido);

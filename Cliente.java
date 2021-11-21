@@ -14,17 +14,18 @@ public class Cliente {
     public int estado;
     private float velocidad;
     private BufferedImage sprt1,sprt2,sprt3,sprtActual;  //sprites del personaje
-    private BufferedImage pedido;   // sprite del pedido del cliente
+    //private BufferedImage pedido;   // sprite del pedido del cliente
+    Pedido platoListo;
     private double spSalida;
-    double tPedido;         // tmpPedido que tardará el pedido del cliente (segundos)
-    private double transcurrido;
+    //double tPedido;         // tmpPedido que tardará el pedido del cliente (segundos)
+    //private double transcurrido;
     public double tmpEspera;       // tmpPedido que el cliente puede esperar en la fila
     private double tmpAux;          // variables usada para la barra de progreso de tmpPedido en la fila
     public double porcentaje, porcentajePedido;
     private boolean saliendo;
     private boolean atendido;
     private boolean terminado;
-    int plato;
+    private int plato;
     
     
     public Cliente(){
@@ -36,9 +37,9 @@ public class Cliente {
         y = 254;
         velocidad = 80;
         estado = 1;
-        this.tPedido = 0;
+        //this.tPedido = 0;
         this.tmpEspera = 0;
-        transcurrido = 0;
+        //transcurrido = 0;
         saliendo = false;
         porcentaje = 1.0;
         porcentajePedido = 0;
@@ -46,7 +47,7 @@ public class Cliente {
         atendido = false;
     }
     
-    public Cliente(double tmpEspera,double tPedido,int plato,int cliente){
+    public Cliente(double tmpEspera,int plato,int cliente){
         sprt1 = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"_1.png");
         sprt2 = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"9.png");
         spSalida = 1;
@@ -55,14 +56,14 @@ public class Cliente {
         y = 254;
         velocidad = 80;
         estado = 1;
-        this.tPedido = tPedido;
+        //this.tPedido = tPedido;
         this.tmpEspera = tmpEspera;
         tmpAux = tmpEspera;
-        transcurrido = 0;
+        //transcurrido = 0;
         saliendo = false;
         porcentaje = 1.0;
         porcentajePedido = 0;
-        pedido = Imagen.cargaImagen("cafeteria/sprites/plato"+plato+".png");
+        //pedido = Imagen.cargaImagen("cafeteria/sprites/plato"+plato+".png");
         this.cliente = cliente; 
         atendido = false;
         terminado = false;
@@ -84,7 +85,9 @@ public class Cliente {
             //g.drawImage(pedido,Math.round(x+3),Math.round(y-105),null);
         }else if(estado==3){
             if(atendido){
-                g.drawImage(pedido,Math.round(x+3),Math.round(y-20),null);
+                g.setColor(Color.WHITE);
+                g.drawString("¡Gracias!", Math.round(x-5), Math.round(y-30));
+                g.drawImage(platoListo.getSprite(),Math.round(x+3),Math.round(y-20),null);
             }else if(saliendo){
                 g.setColor(Color.WHITE);
                 g.drawString("¡Me voy!", Math.round(x), Math.round(y-10));
@@ -153,8 +156,16 @@ public class Cliente {
         return saliendo;
     }
     
+    public int hacerPedido(){
+        return plato;
+    }
+    
+    public void recibirPlato(Pedido p){
+        platoListo = p;
+    }
+    
     public void salir(float dt){
-        if(y<438){
+        if(y<458){
             y += velocidad*dt;
             sprtActual = Imagen.cargaImagen("cafeteria/sprites/"+cliente+(int)spSalida+".png");
             //System.out.println("conteo:"+spSalida);
