@@ -2,7 +2,6 @@ package cafeteria;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -14,11 +13,12 @@ import javax.swing.SwingUtilities;
  * Clase que lleva el control del ciclo del programa
  * @author Geny
  */
-public class Simulacion extends JPanel{
+public class Simulacion extends JPanel implements Runnable{
     private final int PX_ANCHO = 550;       // ancho del lienzo
     private final int PX_ALTO = 418;        // alto del lienzo 
     private BufferedImage fondo;            // imágen de fondo
     private Font fEstadisticas,fClientes;   // fuentes para mostrar las estadísticas y los mensajes de los clientes
+    private Font fPausa;                    // fuente para el mensaje de pausa
     
     private float dt;                   // diferencia de tiempo para la ejecución de la simulación
     private int i,j,s;
@@ -26,16 +26,18 @@ public class Simulacion extends JPanel{
     private Consumidor link;                // objeto que 'atiende' a los clientes
     private Cliente cteActual;              // cliente que está siendo atendido
     private Cliente cteAtendido;            // cliente que ya fue atendido y que va saliendo del lugar
-    private Productora filaClientes;        // fila de clientes esperando a ser atendidos
+    public Productora filaClientes;        // fila de clientes esperando a ser atendidos
     private ArrayList<Cliente> impacientes; // clientes que se salen de la fila
     private int atendidos,perdidos;         // vaiables para conteo de clientes
+    Color myColour;
  
     public Simulacion(String imgFondo){
-        //setLayout(new FlowLayout());
+        //System.out.println("Creando ciclo###############################");
         setPreferredSize(new Dimension(PX_ANCHO,PX_ALTO));
         fondo = Imagen.cargaImagen(imgFondo);
         fEstadisticas = new Font("Comic Sans MS",Font.PLAIN,14);
         fClientes = getFont();
+        fPausa = new Font("Comic Sans MS",Font.PLAIN,40);
         
         link = new Consumidor();
         i=0;
@@ -45,11 +47,15 @@ public class Simulacion extends JPanel{
         cteActual = null;
         atendidos = 0;
         perdidos = 0;
+        myColour = new Color(1,1,1,0);
     }
     
     @Override
     public void paint(Graphics g){
-        g.drawImage(fondo, 0,0,PX_ANCHO, PX_ALTO, this);
+        //System.out.println("Repintando");
+        g.drawImage(fondo, 0, 0, PX_ANCHO, PX_ALTO, this);
+        
+        g.setFont(fClientes);
         link.pintarConsumidor(g);
         link.setSprite((i++)/100);
         if(i>1000){
@@ -84,13 +90,35 @@ public class Simulacion extends JPanel{
         if(cteAtendido!=null){
             cteAtendido.pintarCliente(g);
         }
-        //g.drawRect(300,254,50,50);
+        
+        if(Main.pausa){
+            g.setColor(new Color(255, 255,255,127));
+            g.fillRect(0, 0, PX_ANCHO, PX_ALTO);
+            g.setColor(Color.WHITE);
+            g.setFont(fPausa);
+            g.drawString("PAUSA",205,400);
+        }
+        
+        if(!Main.ejecutando){
+            g.setColor(myColour);
+            g.fillRect(0, 0, PX_ANCHO, PX_ALTO);
+        }
     }
     
     public synchronized void cicloPrincipalJuego()throws Exception{
-        filaClientes.start();
         long tiempoViejo = System.nanoTime();// calcula el tiempo en nanoSegundos
-        while(true){
+        while(Main.ejecutando){
+            //System.out.println("-------");
+            if(Main.pausa){
+                System.out.println("Pausa");
+                dibuja();
+                wait();
+                System.out.println("REANUDANDO...");
+                tiempoViejo = System.nanoTime();
+            }else{
+                //System.out.println("REANUDANDO...");
+                //notify();               
+            }
             long tiempoNuevo = System.nanoTime();
             dt = (tiempoNuevo-tiempoViejo)/1000000000f;            
             tiempoViejo = tiempoNuevo;
@@ -135,11 +163,59 @@ public class Simulacion extends JPanel{
                 s++;
             }
         }
+        for(int v=0;v<=10;v++){
+            try{
+                Thread.sleep(10);
+            }catch(InterruptedException e){}
+            //System.out.println("Cerrando");
+            myColour = new Color(0,0,0,v*0.1f); 
+            dibuja();
+        }
+        System.out.println("Terminando ejecución de simulación");
     }
     
-    private void dibuja()throws Exception{
-        SwingUtilities.invokeAndWait(() -> {
-            repaint();
+    private void dibuja(){
+        try{
+        SwingUtilities.invokeAndWait(new Runnable() {
+            @Override
+            public void run() {
+                repaint();
+            }
         });
+        }catch(Exception e){
+         e.printStackTrace();
+        }
+    }
+    
+    @Override
+    public void run() {
+        try{
+            System.out.println("Iniciando productora......");
+            filaClientes.start();
+            cicloPrincipalJuego();
+        }catch(Exception e){
+            System.out.println("EXCEPCION: ");
+            e.printStackTrace();
+        }
+        System.out.println("Terminando hilo");
+    }
+    
+    public synchronized void reanudarSimulacion(){
+        notify();
+    }
+    
+    public boolean estadoProductora(){
+        return filaClientes.isAlive();
+    }
+    
+    public void reiniciarValores(){
+        atendidos = 0;
+        perdidos = 0;
+        filaClientes = new Productora();
+        link = new Consumidor();
+        cteActual = null;
+        cteAtendido = null;
+        impacientes.clear();
+        myColour = new Color(1,1,1,0);
     }
 }

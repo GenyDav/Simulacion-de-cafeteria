@@ -83,12 +83,12 @@ public class Consumidor {
         //cliente.serAtendido(dt); 
         porcentajePedido = transcurrido/p.getTmpPedido();
         if(transcurrido>p.getTmpPedido()){
-            cliente.setEstado(3);
+            cliente.setEstado(Cliente.CTE_SALIENDO_LUGAR);
             cocinando = false;
             cliente.recibirPlato(p);
         }
         transcurrido += dt;
-        System.out.println(porcentajePedido);
+        //System.out.println(porcentajePedido);
     }
     
     public boolean getEstado(){
@@ -134,5 +134,16 @@ public class Consumidor {
     
     public int getY(){
         return y;
+    }
+    
+    public void reiniciarCocinero(){
+        sprite = 1;
+        ocupado = false; // cuando está desocupado es false
+        cocinando = false;
+        //plato = 0;
+        //tmpPedido = 0;
+        transcurrido = 0;
+        porcentajePedido = 0;
+        p = null;
     }
 }

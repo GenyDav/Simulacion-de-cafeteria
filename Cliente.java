@@ -12,6 +12,9 @@ public class Cliente {
     private float x,y;      // coordenadas del sprite
     private int cliente;    // tipo de cliente
     public int estado;
+    public static final int CTE_ESPERANDO_FILA = 1;
+    public static final int CTE_ESPERANDO_CHEF = 2;
+    public static final int CTE_SALIENDO_LUGAR = 3;
     private float velocidad;
     private BufferedImage sprt1,sprt2,sprt3,sprtActual;  //sprites del personaje
     //private BufferedImage pedido;   // sprite del pedido del cliente
@@ -77,13 +80,14 @@ public class Cliente {
             g.fillRect(Math.round(x),Math.round(y-10),40,5);
             g.setColor(Color.BLUE);
             g.fillRect(Math.round(x),Math.round(y-10), (int)Math.round(porcentaje*40),5);
-        }else if(estado==2){ // mostrar una barra de progreso en el pedido
+        }/*else if(estado==2){ // mostrar una barra de progreso en el pedido
             /*g.setColor(Color.WHITE);
             g.fillRect(Math.round(x),Math.round(y-80),40,5);
             g.setColor(Color.RED);
-            g.fillRect(Math.round(x),Math.round(y-80),(int)Math.round(porcentajePedido*40),5);*/
+            g.fillRect(Math.round(x),Math.round(y-80),(int)Math.round(porcentajePedido*40),5);
             //g.drawImage(pedido,Math.round(x+3),Math.round(y-105),null);
-        }else if(estado==3){
+        }*/
+        else if(estado==CTE_SALIENDO_LUGAR){
             if(atendido){
                 g.setColor(Color.WHITE);
                 g.drawString("¡Gracias!", Math.round(x-5), Math.round(y-30));
@@ -101,7 +105,7 @@ public class Cliente {
         //System.out.println("tmpPedido: "+tmpEspera);
         if(tmpEspera<=0){
             sprtActual = sprt3;
-            estado = 3;
+            estado = CTE_SALIENDO_LUGAR;
             saliendo = true;
         }
     }
@@ -109,7 +113,7 @@ public class Cliente {
     public void serAtendido(float dt){
         //System.out.println("Siendo atendido");
         switch(estado){
-            case 1:
+            case CTE_ESPERANDO_FILA:
                 if(x>168){
                     x -= velocidad*dt;
                     sprtActual = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"_"+(int)spSalida+".png");
@@ -119,11 +123,11 @@ public class Cliente {
                     }
                 }else{
                     sprtActual = sprt2;
-                    estado = 2;
+                    estado = CTE_ESPERANDO_CHEF;
                     Consumidor.cocinando = true;
                 }
                 break;
-            case 2:
+            case CTE_ESPERANDO_CHEF:
                 //Consumidor.cocinando = true;
                 /*transcurrido += dt;
                 porcentajePedido = transcurrido/tPedido;
@@ -133,7 +137,7 @@ public class Cliente {
                 }*/
                 atendido = true;
                 break;
-            case 3: // saliendo del lugar
+            case CTE_SALIENDO_LUGAR: // saliendo del lugar
                 //System.out.println(y);
                 salir(dt);
                 break;
