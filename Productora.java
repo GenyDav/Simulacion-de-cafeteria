@@ -19,8 +19,8 @@ public class Productora extends Thread{
     }
     
     synchronized public void agregarCliente(){
-        fila.add(new Cliente(round(random()*20+1),(int)(Math.random()*15+1),(int)(Math.random()*4+1)));
-        System.out.println("Agregado a la fila" + fila.size());
+        fila.add(new Cliente(round(random()*20+1),(int)(Math.random()*15+1),(int)(Math.random()*8+1)));
+        //System.out.println("Agregado a la fila " + fila.size());
         total++;
         try{
             if(fila.size()==5){
@@ -56,10 +56,10 @@ public class Productora extends Thread{
                     //System.out.println("creando cliente...");
                     agregarCliente();
                 }else{
-                    System.out.println("pausando cliente...");
+                    //System.out.println("pausando cliente...");
                 }
             }catch(InterruptedException e){}
         }
-        System.out.println("Terminando productora");
+        //System.out.println("Terminando productora");
     }
 }

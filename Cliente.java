@@ -40,7 +40,6 @@ public class Cliente {
         y = 254;
         velocidad = 80;
         estado = 1;
-        //this.tPedido = 0;
         this.tmpEspera = 0;
         //transcurrido = 0;
         saliendo = false;
@@ -117,6 +116,7 @@ public class Cliente {
                 if(x>168){
                     x -= velocidad*dt;
                     sprtActual = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"_"+(int)spSalida+".png");
+                    //System.out.println((int)spSalida);
                     spSalida += 0.1;
                     if(spSalida>5){
                         spSalida = 1;
