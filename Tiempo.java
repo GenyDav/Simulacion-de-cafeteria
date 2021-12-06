@@ -37,7 +37,7 @@ public class Tiempo {
                 txtMin = min<10?"0"+Integer.toString(min):Integer.toString(min);
                 txtSeg = seg<10?"0"+Integer.toString(seg):Integer.toString(seg);            
                 //System.out.println(min+":"+seg);
-                etiqueta.setText(txtMin+":" + txtSeg);
+                etiqueta.setText("Tiempo: "+txtMin+":" + txtSeg);
                 r.moverManecillas(min, seg);
             }
         });  
@@ -62,7 +62,7 @@ public class Tiempo {
     public void reiniciarContador(){
         min = 0;
         seg = 0;
-        etiqueta.setText("00:00");
+        etiqueta.setText("Tiempo: 00:00");
         r.obtenerHoraSistema();
     }
     

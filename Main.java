@@ -9,13 +9,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 /**
  *
@@ -34,6 +33,7 @@ public class Main {
     JLabel mensaje;
     Thread ciclo;
     Tiempo t;
+    ImageIcon icono;
     
     public Main(){
         pausa = false;
@@ -54,13 +54,14 @@ public class Main {
         btnReinicio.setForeground(Color.white);
         btnReinicio.setFocusPainted(false);
         
-        tiempo = new JLabel("00:00");
+        tiempo = new JLabel("Tiempo: 00:00");
         tiempo.setToolTipText("Tiempo transcurrido");
         mensaje = new JLabel("Ejecutando");
         mensaje.setToolTipText("Estado de la simulación");
         ciclo = new Thread(s);
         t = new Tiempo();
         //System.out.println(t.r.toString());
+        icono = new ImageIcon("cafeteria/sprites/icono.png");
     }
     
     public void configurarVentana(){
@@ -102,7 +103,6 @@ public class Main {
         
         btnPausa.addActionListener(e->{
             pausa = !pausa;
-            
             if(!pausa){
                 //System.out.println("reanudando: " + pausa);
                 s.reanudarSimulacion();
@@ -155,6 +155,7 @@ public class Main {
         frame.pack();
         frame.setLocationRelativeTo(null);  
         frame.setVisible(true);
+        frame.setIconImage(new ImageIcon(getClass().getResource("/cafeteria/sprites/icono.png")).getImage());
         //frame.setResizable(false);
     }
     
