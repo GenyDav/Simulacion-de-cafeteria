@@ -35,7 +35,6 @@ public final class Main {
     Thread ciclo;
     Tiempo t;
     ImageIcon icono;
-    //Audio audio;
     
     public Main(){
         pausa = false;
@@ -65,7 +64,6 @@ public final class Main {
         //System.out.println(t.r.toString());
         icono = new ImageIcon("cafeteria/sprites/icono.png");
         
-        //audio = new Audio();
     }
     
     public void configurarVentana(){
