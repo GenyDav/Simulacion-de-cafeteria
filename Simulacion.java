@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -32,10 +33,16 @@ public class Simulacion extends JPanel implements Runnable{
     Color myColour;
     Reloj reloj;
     boolean inicioCiclo;                    // para mostrar el degradado en la pantalla cuando se inicia un ciclo
+    JButton boton;
+    Audio a;
  
     public Simulacion(String imgFondo){
         //System.out.println("Creando ciclo###############################");
         setPreferredSize(new Dimension(PX_ANCHO,PX_ALTO));
+        setLayout(null);
+        /*boton = new JButton("Boton");
+        boton.setBounds(100, 100, 50, 100);
+        add(boton);*/
         fondo = Imagen.cargaImagen(imgFondo);
         fEstadisticas = new Font("Comic Sans MS",Font.PLAIN,14);
         fClientes = getFont();
@@ -57,15 +64,16 @@ public class Simulacion extends JPanel implements Runnable{
     public void paint(Graphics g){
         //System.out.println("Repintando");
         g.drawImage(fondo, 0, 0, PX_ANCHO, PX_ALTO, this);
+        //boton.repaint();
         reloj.pintarReloj(g);
        
         
         g.setFont(fClientes);
         link.pintarConsumidor(g);
-        link.setSprite((i++)/100);
+        /*link.setSprite((i++)/100);
         if(i>1000){
             i=0;
-        }
+        }*/
         //Color myColour = new Color(255, 255,255,150); // 127, 50%
         if(cteActual!=null){
             cteActual.pintarCliente(g);
@@ -74,10 +82,10 @@ public class Simulacion extends JPanel implements Runnable{
         }
         g.setColor(Color.WHITE);
         g.setFont(fEstadisticas);
-        g.drawString("Atendidos: "+atendidos,70,53);
-        g.drawString("Perdidos: "+perdidos,70,73);
-        g.drawString("En espera: "+filaClientes.getTamFila(),70,93);
-        g.drawString("Total: "+filaClientes.getTotal(),70,113);
+        g.drawString("Atendidos: "+atendidos,70,50);
+        g.drawString("Perdidos: "+perdidos,70,70);
+        g.drawString("En espera: "+filaClientes.getTamFila(),70,90);
+        g.drawString("Total: "+filaClientes.getTotal(),70,110);
         
         g.setFont(fClientes);
         int n=0;

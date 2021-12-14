@@ -37,7 +37,7 @@ public class Cliente {
         spSalida = 1;
         sprtActual = sprt1;
         x = 550;
-        y = 254;
+        y = 234;
         velocidad = 80;
         estado = 1;
         this.tmpEspera = 0;
@@ -55,7 +55,7 @@ public class Cliente {
         spSalida = 1;
         sprtActual = sprt1;
         x = 550;
-        y = 254;
+        y = 245;
         velocidad = 80;
         estado = 1;
         //this.tPedido = tPedido;
@@ -103,7 +103,7 @@ public class Cliente {
         porcentaje = tmpEspera/tmpAux;
         //System.out.println("tmpPedido: "+tmpEspera);
         if(tmpEspera<=0){
-            sprtActual = sprt3;
+            //sprtActual = sprt3;
             estado = CTE_SALIENDO_LUGAR;
             saliendo = true;
         }

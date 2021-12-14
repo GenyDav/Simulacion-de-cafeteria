@@ -9,7 +9,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,7 +22,7 @@ import javax.swing.JPanel;
  * @author Geny Dávila
  * @version 2.2 
  */
-public class Main {
+public final class Main {
     public static volatile boolean pausa;
     public static volatile boolean ejecutando;
     public Simulacion s;
@@ -34,6 +35,7 @@ public class Main {
     Thread ciclo;
     Tiempo t;
     ImageIcon icono;
+    //Audio audio;
     
     public Main(){
         pausa = false;
@@ -62,6 +64,8 @@ public class Main {
         t = new Tiempo();
         //System.out.println(t.r.toString());
         icono = new ImageIcon("cafeteria/sprites/icono.png");
+        
+        //audio = new Audio();
     }
     
     public void configurarVentana(){
@@ -101,7 +105,7 @@ public class Main {
         t.setEtiqueta(tiempo);
         t.iniciarTiempo();
         
-        btnPausa.addActionListener(e->{
+        btnPausa.addActionListener((ActionEvent e) -> {
             pausa = !pausa;
             if(!pausa){
                 //System.out.println("reanudando: " + pausa);
@@ -117,7 +121,7 @@ public class Main {
             }
         });
 
-        btnReinicio.addActionListener(e->{
+        btnReinicio.addActionListener((ActionEvent e)->{
             try{
                 if(ejecutando){
                     // para limpiar correctamente la pantalla cuando está en pausa 
@@ -145,6 +149,7 @@ public class Main {
                     btnPausa.setText("Pausa");
                     mensaje.setText("En ejecución");
                     t.iniciarTiempo();
+                    new Audio().start();
                 }
             }catch(Exception ex){
                 System.out.println(ex.getMessage());
@@ -156,6 +161,9 @@ public class Main {
         frame.setLocationRelativeTo(null);  
         frame.setVisible(true);
         frame.setIconImage(new ImageIcon(getClass().getResource("/cafeteria/sprites/icono.png")).getImage());
+        
+        //audio.start();
+        new Audio().start();
         //frame.setResizable(false);
     }
     

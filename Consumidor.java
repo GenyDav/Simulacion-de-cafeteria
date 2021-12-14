@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cafeteria;
 
 import java.awt.Color;
@@ -15,8 +10,9 @@ import java.awt.image.BufferedImage;
  */
 public class Consumidor {
     private int x,y; // coordenadas del sprite
-    private int sprite;
+    private double sprite;
     private BufferedImage sprt1,sprt2,sprt3; //sprites del personaje
+    private BufferedImage sprtActual;
     boolean ocupado;
     static boolean cocinando;
     //int plato;
@@ -28,12 +24,12 @@ public class Consumidor {
     Pedido p;
     
     public Consumidor(){
-        sprt1 = Imagen.cargaImagen("cafeteria/sprites/chef1.png");
-        sprt2 = Imagen.cargaImagen("cafeteria/sprites/chef2.png");
-        sprt3 = Imagen.cargaImagen("cafeteria/sprites/chef3.png");
-        sprite = 1;
-        x = 168;
-        y = 184;
+        sprt1 = Imagen.cargaImagen("cafeteria/sprites/chef_1.png");
+        sprt2 = Imagen.cargaImagen("cafeteria/sprites/chef_2.png");
+        sprt3 = Imagen.cargaImagen("cafeteria/sprites/chef_3.png");
+        sprite = 2;
+        x = 169;
+        y = 182;
         ocupado = false; // cuando está desocupado es false
         cocinando = false;
         //plato = 0;
@@ -44,16 +40,21 @@ public class Consumidor {
     }
     
     public void pintarConsumidor(Graphics g){
+        g.drawImage(sprtActual,x,y,null);
         if(cocinando){
             g.setColor(Color.WHITE);
-            g.drawString("Cocinando", x-10, y-40);
-            g.drawImage(p.getSprite(),Math.round(x+3),Math.round(y-35), null);
+            g.drawString("Preparando", x+41, y-125);
+            g.drawString("Cocinando", x-10, y-15);
+            g.drawImage(p.getSprite(),Math.round(x+3),Math.round(y+53), null);//y-35
             g.setColor(Color.WHITE);
             g.fillRect(Math.round(x),Math.round(y-10),40,5);
             g.setColor(Color.RED);
             g.fillRect(Math.round(x),Math.round(y-10),(int)Math.round(porcentajePedido*40),5);
+        }else{
+            sprtActual = sprt1;
         }
-        switch(sprite){
+
+        /*switch(sprite){
             case 7:
                 g.drawImage(sprt2,x,y,null);
                 break;
@@ -66,7 +67,7 @@ public class Consumidor {
             default:
                 g.drawImage(sprt1,x,y,null);
                 break;
-        }
+        }*/
     }
     
     public void tomarPedido(Cliente cte){
@@ -89,6 +90,14 @@ public class Consumidor {
         }
         transcurrido += dt;
         //System.out.println(porcentajePedido);
+        
+        sprtActual = Imagen.cargaImagen("cafeteria/sprites/chef_"+(int)sprite+".png");
+        //System.out.println((int)spSalida);
+        sprite += 0.05;
+        //System.out.println("sprite actual: "+(int)sprite);
+        if(sprite>4){
+            sprite = 2;
+        }
     }
     
     public boolean getEstado(){
@@ -100,7 +109,7 @@ public class Consumidor {
         ocupado = e;
     }
 
-    public int getSprite() {
+    public double Sprite() {
         return sprite;
     }
 

@@ -34,7 +34,7 @@ public final class Reloj {
         sprt1 = Imagen.cargaImagen("cafeteria/sprites/reloj_1.png");
         sprt2 = Imagen.cargaImagen("cafeteria/sprites/reloj_2.png");
         sprt3 = Imagen.cargaImagen("cafeteria/sprites/reloj_3.png");
-        sprtActual = sprt1;
+        sprtActual = sprt3;
         tmpIntervalo = 0;
         ladoPendulo = 1;
         horaSistema = obtenerHoraSistema();
@@ -85,7 +85,7 @@ public final class Reloj {
             if(ladoPendulo==DER){
                 sprtActual = sprt3;
                 ladoPendulo = IZQ;
-                //System.out.println("der");
+                //ystem.out.println("der");
             }
             else if(ladoPendulo==IZQ){
                 ladoPendulo = DER;
