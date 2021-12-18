@@ -15,12 +15,9 @@ public class Consumidor {
     private BufferedImage sprtActual;
     boolean ocupado;
     static boolean cocinando;
-    //int plato;
-    //double tmpPedido; // tmpPedido que toma preparar el pedido
     double transcurrido;
     double porcentajePedido;
     Cliente cliente;
-    //BufferedImage pedido;
     Pedido p;
     
     public Consumidor(){
@@ -32,8 +29,6 @@ public class Consumidor {
         y = 182;
         ocupado = false; // cuando está desocupado es false
         cocinando = false;
-        //plato = 0;
-        //tmpPedido = 0;
         transcurrido = 0;
         porcentajePedido = 0;
         p = null;
@@ -43,13 +38,15 @@ public class Consumidor {
         g.drawImage(sprtActual,x,y,null);
         if(cocinando){
             g.setColor(Color.WHITE);
-            g.drawString("Preparando", x+41, y-125);
-            g.drawString("Cocinando", x-10, y-15);
-            g.drawImage(p.getSprite(),Math.round(x+3),Math.round(y+53), null);//y-35
+            //g.drawString("Preparando",200,47);
+            g.drawString("Cocinando",x-10,y-15);
+            g.drawImage(p.getSprite(),x+5,y+53,null);//y-35
             g.setColor(Color.WHITE);
-            g.fillRect(Math.round(x),Math.round(y-10),40,5);
+            g.fillRect(x,y-10,40,5);
             g.setColor(Color.RED);
-            g.fillRect(Math.round(x),Math.round(y-10),(int)Math.round(porcentajePedido*40),5);
+            g.fillRect(x,y-10,(int)Math.round(porcentajePedido*40),5);
+            //g.drawRect(200, 55, 57, 57);
+            g.drawImage(p.getSpritePizarron(),200,55,null);//y-35
         }else{
             sprtActual = sprt1;
         }
@@ -100,6 +97,10 @@ public class Consumidor {
         }
     }
     
+    public int getNumPlatoListo(){
+        return p.getNumPedido();
+    }
+    
     public boolean getEstado(){
         return ocupado;
     }
@@ -147,7 +148,7 @@ public class Consumidor {
     
     public void reiniciarCocinero(){
         sprite = 1;
-        ocupado = false; // cuando está desocupado es false
+        ocupado = false;
         cocinando = false;
         //plato = 0;
         //tmpPedido = 0;

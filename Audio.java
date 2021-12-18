@@ -47,6 +47,6 @@ public class Audio extends Thread {
         } catch (JavaLayerException e) {
             e.printStackTrace();
         }
-        System.out.println("Terminado");
+        //System.out.println("Terminado");
     }
 }

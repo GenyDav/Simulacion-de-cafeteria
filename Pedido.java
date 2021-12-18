@@ -14,12 +14,20 @@ import static java.lang.Math.round;
  * @author Geny
  */
 public class Pedido {
+    private int numPedido;
     private BufferedImage sprite;
+    private BufferedImage sprite2;
     private double tmpPedido;
     
     public Pedido(int numPedido){
+        this.numPedido = numPedido;
         sprite = Imagen.cargaImagen("cafeteria/sprites/plato"+numPedido+".png");
+        sprite2 = Imagen.cargaImagen("cafeteria/sprites/plato"+numPedido+"_2.png");
         tmpPedido = round(random()*11+5);
+    }
+    
+    public int getNumPedido(){
+        return numPedido;
     }
     
     public double getTmpPedido(){
@@ -28,5 +36,9 @@ public class Pedido {
     
     public BufferedImage getSprite(){
         return sprite;
+    }
+    
+    public BufferedImage getSpritePizarron(){
+        return sprite2;
     }
 }

@@ -10,7 +10,6 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -51,7 +50,7 @@ public final class Main {
         btnPausa.setFocusPainted(false);
         
         btnReinicio.setBackground(Color.black);
-        btnReinicio.setToolTipText("Detener la simulación actual");
+        btnReinicio.setToolTipText("Detener/Iniciar la simulación");
         btnReinicio.setForeground(Color.white);
         btnReinicio.setFocusPainted(false);
         
@@ -67,6 +66,7 @@ public final class Main {
     }
     
     public void configurarVentana(){
+        frame.setResizable(false);
         frame.add(s, BorderLayout.CENTER);
         panelControl.setLayout(new GridLayout(1,4));
         panelControl.setBackground(Color.BLACK);
@@ -160,9 +160,7 @@ public final class Main {
         frame.setVisible(true);
         frame.setIconImage(new ImageIcon(getClass().getResource("/cafeteria/sprites/icono.png")).getImage());
         
-        //audio.start();
         new Audio().start();
-        //frame.setResizable(false);
     }
     
     public static void main(String []args){

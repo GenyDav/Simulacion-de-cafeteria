@@ -30,14 +30,14 @@ public class Cliente {
     private boolean terminado;
     private int plato;
     
-    
+    /*
     public Cliente(){
         sprt1 = Imagen.cargaImagen("cafeteria/sprites/lady_1.png");
         sprt2 = Imagen.cargaImagen("cafeteria/sprites/lady9.png");
         spSalida = 1;
         sprtActual = sprt1;
         x = 550;
-        y = 234;
+        y = 254;
         velocidad = 80;
         estado = 1;
         this.tmpEspera = 0;
@@ -47,7 +47,7 @@ public class Cliente {
         porcentajePedido = 0;
         //pedido = Imagen.cargaImagen("cafeteria/sprites/plato"+plato+".png");
         atendido = false;
-    }
+    }*/
     
     public Cliente(double tmpEspera,int plato,int cliente){
         sprt1 = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"_1.png");
@@ -55,7 +55,7 @@ public class Cliente {
         spSalida = 1;
         sprtActual = sprt1;
         x = 550;
-        y = 245;
+        y = 255;
         velocidad = 80;
         estado = 1;
         //this.tPedido = tPedido;
@@ -89,8 +89,8 @@ public class Cliente {
         else if(estado==CTE_SALIENDO_LUGAR){
             if(atendido){
                 g.setColor(Color.WHITE);
-                g.drawString("¡Gracias!", Math.round(x-5), Math.round(y-30));
-                g.drawImage(platoListo.getSprite(),Math.round(x+3),Math.round(y-20),null);
+                g.drawString("¡Gracias!", Math.round(x-3), Math.round(y-32));
+                g.drawImage(platoListo.getSprite(),Math.round(x+5),Math.round(y-32),null);
             }else if(saliendo){
                 g.setColor(Color.WHITE);
                 g.drawString("¡Me voy!", Math.round(x), Math.round(y-10));

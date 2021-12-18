@@ -21,10 +21,10 @@ public class Simulacion extends JPanel implements Runnable{
     private Font fEstadisticas,fClientes;   // fuentes para mostrar las estadísticas y los mensajes de los clientes
     private Font fPausa;                    // fuente para el mensaje de pausa
     
-    private float dt;                   // diferencia de tiempo para la ejecución de la simulación
+    private float dt;                       // diferencia de tiempo para la ejecución de la simulación
     private int i,j,s;
     
-    private Consumidor link;                // objeto que 'atiende' a los clientes
+    private Consumidor chef;                // objeto que 'atiende' a los clientes
     private Cliente cteActual;              // cliente que está siendo atendido
     private Cliente cteAtendido;            // cliente que ya fue atendido y que va saliendo del lugar
     public Productora filaClientes;         // fila de clientes esperando a ser atendidos
@@ -34,10 +34,10 @@ public class Simulacion extends JPanel implements Runnable{
     Reloj reloj;
     boolean inicioCiclo;                    // para mostrar el degradado en la pantalla cuando se inicia un ciclo
     JButton boton;
-    Audio a;
+    boolean estadisticas;
+    Resultados resultado;
  
     public Simulacion(String imgFondo){
-        //System.out.println("Creando ciclo###############################");
         setPreferredSize(new Dimension(PX_ANCHO,PX_ALTO));
         setLayout(null);
         /*boton = new JButton("Boton");
@@ -48,33 +48,32 @@ public class Simulacion extends JPanel implements Runnable{
         fClientes = getFont();
         fPausa = new Font("Comic Sans MS",Font.PLAIN,40);
         
-        link = new Consumidor();
+        chef = new Consumidor();
         i=0;
         impacientes = new ArrayList();
         filaClientes = new Productora();
         cteAtendido = null;
         cteActual = null;
-        atendidos = 0;
-        perdidos = 0;
+        //atendidos = 0;
+        //perdidos = 0;
         myColour = new Color(1,1,1,0);
         inicioCiclo = true;
+        estadisticas = false;
+        resultado = new Resultados();
     }
     
     @Override
     public void paint(Graphics g){
-        //System.out.println("Repintando");
         g.drawImage(fondo, 0, 0, PX_ANCHO, PX_ALTO, this);
         //boton.repaint();
-        reloj.pintarReloj(g);
-       
+        reloj.pintarReloj(g);       
         
         g.setFont(fClientes);
-        link.pintarConsumidor(g);
-        /*link.setSprite((i++)/100);
+        chef.pintarConsumidor(g);
+        /*chef.setSprite((i++)/100);
         if(i>1000){
             i=0;
         }*/
-        //Color myColour = new Color(255, 255,255,150); // 127, 50%
         if(cteActual!=null){
             cteActual.pintarCliente(g);
             //System.out.println(cteActual.tmpEspera);
@@ -82,10 +81,12 @@ public class Simulacion extends JPanel implements Runnable{
         }
         g.setColor(Color.WHITE);
         g.setFont(fEstadisticas);
-        g.drawString("Atendidos: "+atendidos,70,50);
-        g.drawString("Perdidos: "+perdidos,70,70);
-        g.drawString("En espera: "+filaClientes.getTamFila(),70,90);
-        g.drawString("Total: "+filaClientes.getTotal(),70,110);
+        g.drawString("Atendidos: " + resultado.getAtendidos(),72,50);
+        g.drawString("Perdidos: " + resultado.getPerdidos(),72,70);
+        g.drawString("En espera: " + filaClientes.getTamFila(),72,90);
+        g.drawString("Total: " + filaClientes.getTotal(),72,110);
+        g.drawString("Preparando",191,51);
+        //g.drawRect(200, 55, 57, 57);
         
         g.setFont(fClientes);
         int n=0;
@@ -105,11 +106,10 @@ public class Simulacion extends JPanel implements Runnable{
         }
         
         if(Main.pausa){
-            g.setColor(new Color(255, 255,255,127));
-            g.fillRect(0, 0, PX_ANCHO, PX_ALTO);
-            g.setColor(Color.WHITE);
-            g.setFont(fPausa);
-            g.drawString("PAUSA",205,400);
+            g.setColor(new Color(0,0,66,100));
+            g.fillRect(0, 0, PX_ANCHO, PX_ALTO);          
+            //g.setFont(fPausa);
+            //g.drawString("PAUSA",205,400);
         }
         
         if(!Main.ejecutando){
@@ -120,6 +120,11 @@ public class Simulacion extends JPanel implements Runnable{
         if(inicioCiclo){
             g.setColor(myColour);
             g.fillRect(0, 0, PX_ANCHO, PX_ALTO);
+        }
+        
+        if(estadisticas){
+            System.out.println("Estadisticas");         
+            resultado.pintarEstadisticas(g);
         }
     }
     
@@ -151,21 +156,21 @@ public class Simulacion extends JPanel implements Runnable{
             tiempoViejo = tiempoNuevo;
             reloj.moverPendulo(dt);
             dibuja();   // dibujar los componentes
-            if(!link.getEstado()){ // si está desocupado
+            if(!chef.getEstado()){ // si está desocupado
                 if(filaClientes.getTamFila()>0){
                     cteActual = filaClientes.getCliente(0);
                     filaClientes.borrarCliente(0);                  
                     //link.setEstado(true);
-                    link.tomarPedido(cteActual);
+                    chef.tomarPedido(cteActual);
                 }
             }else{ // si está ocupado
                 cteActual.serAtendido(dt); 
                 if(cteActual.getEstado() == Cliente.CTE_ESPERANDO_CHEF)
-                    link.atenderCliente(dt);
+                    chef.atenderCliente(dt);
                 if(cteActual.getEstado() == Cliente.CTE_SALIENDO_LUGAR){    // si el cliente terminó de ser atendido
-                    link.setEstado(false);                                  // marcar al que atiende como desocupado
+                    chef.setEstado(false);                                  // marcar al que atiende como desocupado
                     cteAtendido = cteActual; 
-                    atendidos++;
+                    resultado.actPlatosVendidos(chef.getNumPlatoListo());              
                 }
                 j=0;
                 while(filaClientes.getTamFila()>0&&j<filaClientes.getTamFila()){
@@ -185,34 +190,41 @@ public class Simulacion extends JPanel implements Runnable{
             while(impacientes.size()>0&&s<impacientes.size()){
                 impacientes.get(s).salir(dt);
                 if(impacientes.get(s).getTerminado()){ // como el cliente ya salió del lugar, se elimina de la lista
-                    perdidos++;
+                    resultado.sumarPerdidos();
                     impacientes.remove(s);
                 }
                 s++;
             }
         }
-        for(int v=0;v<=10;v++){
+        for(int v=0;v<=9;v++){
             try{
-                Thread.sleep(10);
+                Thread.sleep(15);
             }catch(InterruptedException e){}
             //System.out.println("Cerrando");
             myColour = new Color(0,0,0,v*0.1f); 
             dibuja();
         }
-        //System.out.println("Terminando ejecución de simulación");
+        estadisticas = true;
+        System.out.println("Terminando ejecución de simulación");
     }
     
     private void dibuja(){
         try{
-        SwingUtilities.invokeAndWait(new Runnable() {
-            @Override
-            public void run() {
-                repaint();
-            }
-        });
+            SwingUtilities.invokeAndWait(new Runnable() {
+                @Override
+                public void run() {
+                    repaint();
+                }
+            });
         }catch(Exception e){
-         e.printStackTrace();
+            e.printStackTrace();
         }
+    }
+    
+    public void pintarResultados(Graphics g){
+        g.setColor(Color.WHITE);
+        g.setFont(fEstadisticas);
+        g.drawString("Atendidos: ",70,50);
     }
     
     @Override
@@ -231,21 +243,19 @@ public class Simulacion extends JPanel implements Runnable{
     public synchronized void reanudarSimulacion(){
         notify();
     }
-    
-    public boolean estadoProductora(){
-        return filaClientes.isAlive();
-    }
-    
+
     public void reiniciarValores(){
         atendidos = 0;
         perdidos = 0;
         filaClientes = new Productora();
-        link = new Consumidor();
+        chef = new Consumidor();
         cteActual = null;
         cteAtendido = null;
         impacientes.clear();
         myColour = new Color(1,1,1,0);
         reloj.moverManecillas(0, 0);
         inicioCiclo = true;
+        estadisticas = false;
+        resultado.reiniciar();
     }
 }
