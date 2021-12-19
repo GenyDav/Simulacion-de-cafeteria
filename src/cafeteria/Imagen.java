@@ -13,10 +13,8 @@ import javax.imageio.ImageIO;
  */
 public class Imagen {
     /**
-     * @param 
-     *      ruta Dirección de la imágen a cargar
-     * @return 
-     *      imágen como objeto BufferedImage
+     * @param ruta Dirección de la imágen a cargar
+     * @return imágen como objeto BufferedImage
      */
     public static BufferedImage cargaImagen(String ruta){
         try {
