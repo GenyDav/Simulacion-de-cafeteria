@@ -75,7 +75,7 @@ public class Resultados {
         for(int i=0;i<4;i++){
             for(int j=0;j<3;j++){                              
                 numPlato++;      
-                plato = Imagen.cargaImagen("cafeteria/sprites/plato" + numPlato + "_2.png");
+                plato = Imagen.cargaImagen("sprites/plato" + numPlato + "_2.png");
                 
                 xAux = 80+(x*i);
                 yAux = y*(j+1);

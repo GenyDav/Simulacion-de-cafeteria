@@ -39,7 +39,7 @@ public final class Main {
         pausa = false;
         ejecutando = true;
         frame = new JFrame("Cafetería");
-        s = new Simulacion("cafeteria/sprites/fondo3.png");
+        s = new Simulacion("sprites/fondo3.png");
         panelControl = new JPanel();
         btnPausa = new JButton("Pausa");
         btnReinicio = new JButton("Detener");
@@ -158,7 +158,7 @@ public final class Main {
         frame.pack();
         frame.setLocationRelativeTo(null);  
         frame.setVisible(true);
-        frame.setIconImage(new ImageIcon(getClass().getResource("/cafeteria/sprites/icono.png")).getImage());
+        frame.setIconImage(new ImageIcon(getClass().getResource("/sprites/icono.png")).getImage());
         
         new Audio().start();
     }

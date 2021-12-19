@@ -26,9 +26,9 @@ public final class Reloj {
     private final int radioMin, radioSeg;
     
     public Reloj(){
-        sprt1 = Imagen.cargaImagen("cafeteria/sprites/reloj_1.png");
-        sprt2 = Imagen.cargaImagen("cafeteria/sprites/reloj_2.png");
-        sprt3 = Imagen.cargaImagen("cafeteria/sprites/reloj_3.png");
+        sprt1 = Imagen.cargaImagen("sprites/reloj_1.png");
+        sprt2 = Imagen.cargaImagen("sprites/reloj_2.png");
+        sprt3 = Imagen.cargaImagen("sprites/reloj_3.png");
         sprtActual = sprt3;
         tmpIntervalo = 0;
         ladoPendulo = 1;

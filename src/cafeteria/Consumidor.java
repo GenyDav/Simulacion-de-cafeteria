@@ -21,9 +21,9 @@ public class Consumidor {
     Pedido p;
     
     public Consumidor(){
-        sprt1 = Imagen.cargaImagen("cafeteria/sprites/chef_1.png");
-        sprt2 = Imagen.cargaImagen("cafeteria/sprites/chef_2.png");
-        sprt3 = Imagen.cargaImagen("cafeteria/sprites/chef_3.png");
+        sprt1 = Imagen.cargaImagen("sprites/chef_1.png");
+        sprt2 = Imagen.cargaImagen("sprites/chef_2.png");
+        sprt3 = Imagen.cargaImagen("sprites/chef_3.png");
         sprite = 2;
         x = 169;
         y = 182;
@@ -88,7 +88,7 @@ public class Consumidor {
         transcurrido += dt;
         //System.out.println(porcentajePedido);
         
-        sprtActual = Imagen.cargaImagen("cafeteria/sprites/chef_"+(int)sprite+".png");
+        sprtActual = Imagen.cargaImagen("sprites/chef_"+(int)sprite+".png");
         //System.out.println((int)spSalida);
         sprite += 0.05;
         //System.out.println("sprite actual: "+(int)sprite);

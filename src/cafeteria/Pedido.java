@@ -21,8 +21,8 @@ public class Pedido {
     
     public Pedido(int numPedido){
         this.numPedido = numPedido;
-        sprite = Imagen.cargaImagen("cafeteria/sprites/plato"+numPedido+".png");
-        sprite2 = Imagen.cargaImagen("cafeteria/sprites/plato"+numPedido+"_2.png");
+        sprite = Imagen.cargaImagen("sprites/plato"+numPedido+".png");
+        sprite2 = Imagen.cargaImagen("sprites/plato"+numPedido+"_2.png");
         tmpPedido = round(random()*11+5);
     }
     

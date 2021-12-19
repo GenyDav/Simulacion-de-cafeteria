@@ -50,8 +50,8 @@ public class Cliente {
     }*/
     
     public Cliente(double tmpEspera,int plato,int cliente){
-        sprt1 = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"_1.png");
-        sprt2 = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"9.png");
+        sprt1 = Imagen.cargaImagen("sprites/"+cliente+"_1.png");
+        sprt2 = Imagen.cargaImagen("sprites/"+cliente+"9.png");
         spSalida = 1;
         sprtActual = sprt1;
         x = 550;
@@ -115,7 +115,7 @@ public class Cliente {
             case CTE_ESPERANDO_FILA:
                 if(x>168){
                     x -= velocidad*dt;
-                    sprtActual = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"_"+(int)spSalida+".png");
+                    sprtActual = Imagen.cargaImagen("sprites/"+cliente+"_"+(int)spSalida+".png");
                     //System.out.println((int)spSalida);
                     spSalida += 0.1;
                     if(spSalida>5){
@@ -171,7 +171,7 @@ public class Cliente {
     public void salir(float dt){
         if(y<458){
             y += velocidad*dt;
-            sprtActual = Imagen.cargaImagen("cafeteria/sprites/"+cliente+(int)spSalida+".png");
+            sprtActual = Imagen.cargaImagen("sprites/"+cliente+(int)spSalida+".png");
             //System.out.println("conteo:"+spSalida);
             spSalida += 0.1;
             if(spSalida>5){
@@ -186,14 +186,14 @@ public class Cliente {
     public void avanzarFila(float dt,int lugar){
         if(x>(300+lugar*60)){
             x -= velocidad*dt;
-            sprtActual = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"_"+(int)spSalida+".png");
+            sprtActual = Imagen.cargaImagen("sprites/"+cliente+"_"+(int)spSalida+".png");
             //System.out.println("conteo:"+spSalida);
             spSalida += 0.1;
             if(spSalida>5){
                 spSalida = 1;
             }
         }else{
-            sprtActual = Imagen.cargaImagen("cafeteria/sprites/"+cliente+"_3.png");
+            sprtActual = Imagen.cargaImagen("sprites/"+cliente+"_3.png");
         }
     }
 }
