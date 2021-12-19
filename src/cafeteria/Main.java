@@ -22,8 +22,8 @@ import javax.swing.JPanel;
  * @version 2.2 
  */
 public final class Main {
-    public static volatile boolean pausa;
-    public static volatile boolean ejecutando;
+    static volatile boolean pausa;
+    static volatile boolean ejecutando;
     public Simulacion s;
     JFrame frame;
     JPanel panelControl;
