@@ -19,7 +19,7 @@ public class Audio extends Thread {
     
     public Audio(){
         try{
-            cancion = new FileInputStream("src\\cafeteria\\sprites\\audio.mp3");
+            cancion = new FileInputStream("src\\sonido\\audio.mp3");
             pl = new Player(cancion);
         }catch(Exception e){
             e.printStackTrace();

@@ -1,1 +1,5 @@
-sprites
+src/recursos
+build
+nbproject
+build.xml
+manifest.mf
