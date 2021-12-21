@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
  * @author Geny D.
  * @version 1.0
  */
-public class Resultados {
+public class Resultado {
     private int atendidos;
     private int perdidos;
     private int platosVendidos[];
@@ -20,7 +20,7 @@ public class Resultados {
     /**
      * Constructor
      */
-    public Resultados(){
+    public Resultado(){
         atendidos = 0;
         perdidos = 0;
         platosVendidos = new int[12];

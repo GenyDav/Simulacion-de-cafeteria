@@ -35,7 +35,7 @@ public class Simulacion extends JPanel implements Runnable{
     boolean inicioCiclo;                    // para mostrar el degradado en la pantalla cuando se inicia un ciclo
     JButton boton;
     boolean estadisticas;
-    Resultados resultado;
+    Resultado resultado;
  
     public Simulacion(String imgFondo){
         setPreferredSize(new Dimension(PX_ANCHO,PX_ALTO));
@@ -59,7 +59,7 @@ public class Simulacion extends JPanel implements Runnable{
         myColour = new Color(1,1,1,0);
         inicioCiclo = true;
         estadisticas = false;
-        resultado = new Resultados();
+        resultado = new Resultado();
     }
     
     @Override
