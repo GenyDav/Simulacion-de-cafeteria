@@ -8,6 +8,7 @@ import static java.lang.Math.round;
  * Clase que crea los objetos de tipo Cliente durante la ejecución de la
  * simulación.
  * @author Geny
+ * @version 2.2
  */
 public class Productora extends Thread{
     private volatile ArrayList<Cliente> fila;   // lista que contiene todos los clientes 'formados' en la fila
