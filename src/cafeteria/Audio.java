@@ -33,17 +33,14 @@ public class Audio extends Thread {
     @Override 
     public void run(){
         try{
-            while(true){
-                if(!Main.ejecutando){       // si el ususario detiene la simulación
-                    break;
-                }else{
-                    if(!Main.pausa){
-                        if(!pl.play(1)){    // si no hay más frames por reproducir
-                            break;
-                        }
-                    }                 
-                }
+            while(Main.ejecutando){
+                if(!Main.pausa){
+                    if(!pl.play(1)){    // si no hay más frames por reproducir
+                        break;
+                    }
+                } 
             }
+            
             // Crear nuevo hilo para repetir la reproducción de la canción
             // cuando el hilo anterior termina de reproducirse
             // (solo si la simulación se está ejecutando)
