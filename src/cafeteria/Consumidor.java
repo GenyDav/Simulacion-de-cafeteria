@@ -66,7 +66,7 @@ public class Consumidor {
             g.setColor(Color.WHITE);
             g.fillRect(x,y-10,40,5);
             //g.setColor(Color.RED);
-            g.setColor(new Color(96,32,57));
+            g.setColor(new Color(165,45,109));
             g.fillRect(x,y-10,(int)Math.round(porcentajePedido*40),5);
             
             // Dibuja el plato
@@ -110,7 +110,7 @@ public class Consumidor {
             cocinando = false;
             ocupado = false;
             cliente.recibirPlato(p);
-            cliente.setEstado(Cliente.CTE_SALIENDO_LUGAR);
+            cliente.setEstado(Cliente.CTE_ATENDIDO);
         }
         transcurrido += dt;
         
