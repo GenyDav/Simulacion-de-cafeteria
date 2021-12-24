@@ -30,12 +30,12 @@ public class Productora extends Thread{
      * El objeto creado se agrega a la lista de clientes
      */
     synchronized public void agregarCliente(){
-        // El tiempo de espera de un cliente se encuentra entre 5 y 30 seg
+        // El tiempo de espera de un cliente se encuentra entre 10 y 30 seg
         // El número de plato entre 1 y 12
         // El número de cliente entre 1 y 8
-        fila.add(new Cliente(round(random()*26+5),(int)(Math.random()*12+1),(int)(Math.random()*8+1)));
+        fila.add(new Cliente(round(random()*21+10),(int)(Math.random()*12+1),(int)(Math.random()*8+1)));
         //System.out.println("Agregado a la fila " + fila.size());
-        System.out.println(fila.get(fila.size()-1).tmpEspera);
+        //System.out.println(fila.get(fila.size()-1).tmpEspera);
         total++;
         try{
             if(fila.size()==5){ // si en la fila hay un máximo de 5 clientes, se pausa la creación
