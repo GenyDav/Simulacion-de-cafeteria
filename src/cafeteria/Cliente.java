@@ -1,6 +1,7 @@
 package cafeteria;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -107,14 +108,20 @@ public final class Cliente {
      */
     public void pintarCliente(Graphics g){
         g.drawImage(sprtActual,Math.round(x),Math.round(y),null);   // dibujar al cliente
+        // Mostrar mensaje sobre el cocinero
+        g.setColor(Color.WHITE);  
+        g.setFont(new Font("Comic Sans MS",Font.BOLD,13));
         switch(estado){
             case CTE_ESPERANDO_FILA:
                 // Mostrar barra con el tiempo de espera restante
+                g.drawString(String.valueOf(Math.round(tmpRestante)), Math.round(x+12), Math.round(y-15));
+                g.setColor(new Color(19,33,60));
+                g.drawRect(Math.round(x-1), Math.round(y-11), 41, 6);
                 g.setColor(Color.WHITE);
                 g.fillRect(Math.round(x),Math.round(y-10),40,5);
-                g.setColor(Color.BLUE);
+                //g.setColor(Color.BLUE);
+                g.setColor(new Color(32,48,96));
                 g.fillRect(Math.round(x),Math.round(y-10), (int)Math.round(porcentaje*40),5);
-                g.drawString(String.valueOf(Math.round(tmpRestante)), Math.round(x), Math.round(y-15));
                 break;
             case CTE_ATENDIDO:
                 // Mostrar el sprite del pedido sobre el cliente
