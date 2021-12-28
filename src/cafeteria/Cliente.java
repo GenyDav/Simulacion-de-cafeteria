@@ -18,21 +18,21 @@ import java.awt.image.BufferedImage;
  * @version 2.1
  */
 public final class Cliente {
-    private float x,y;                                  // coordenadas del sprite del cliente
-    private int cliente;                                // número de identificación del cliente
-    public int estado;                                  
+    private float x,y;                              // coordenadas del sprite del cliente
+    private int cliente;                            // número de identificación del cliente
+    private int estado;                                  
     public static final int CTE_ESPERANDO_FILA = 1; // estado del cliente cuando está formado en la fila
     public static final int CTE_ESPERANDO_CHEF = 2; // estado del cliente cuando está frente al cocinero(chef) esperando su pedido
     public static final int CTE_IMPACIENTE = 3;     // estado del cliente cuando se acaba su tiempo de espera
     public static final int CTE_ATENDIDO = 4;       // estado del cliente cuando se le entrega su pedido listo
     private float velocidad;
-    private BufferedImage sprt2,sprtActual; //sprites del personaje
+    private BufferedImage sprt2,sprtActual; // sprites del personaje
     private int plato;                      // núero de identificación del plato que va a ordenar el cliente
-    Pedido platoListo;                      // plato que el cocinero le entrega al cliente cuando está listo
+    private Pedido platoListo;              // plato que el cocinero le entrega al cliente cuando está listo
     private double spSalida;                // número del sprite que se va a mostrar en pantalla
-    public double tmpRestante;              // tiempo que le queda al cliente antes de salir de la fila
+    private double tmpRestante;             // tiempo que le queda al cliente antes de salir de la fila
     private double tmpEspera;               // tiempo que el cliente puede esperar en la fila
-    public double porcentaje;               // porcentaje del tiempo de espera del cliente
+    private double porcentaje;              // porcentaje del tiempo de espera del cliente
     private boolean cteFuera;               // Indica si el cliente está dentro o fuera de la cafetería
     
     /**
@@ -46,7 +46,7 @@ public final class Cliente {
         tmpRestante = tmpEspera;
         this.plato = plato;
         this.cliente = cliente; 
-        sprt2 = Imagen.cargaImagen("sprites/"+cliente+"9.png");
+        sprt2 = Imagen.cargaImagen("sprites/"+cliente+"9.png"); // sprite con el personaje de espalda
         spSalida = 1;                   // sprite con el personaje de frente
         sprtActual = null;
         x = 550;                        // coordenada x inicial
