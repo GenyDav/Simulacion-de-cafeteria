@@ -18,12 +18,12 @@ public class Consumidor {
     private final BufferedImage sprt1;              // sprite del personaje mientras no está sirviendo un plato
     private final BufferedImage sprtMovimiento[];   // sprites del personaje miestras está cocinando
     private BufferedImage sprtActual;               // sprite que se va a dibujar en pantalla
-    private boolean ocupado;                             
-    static boolean cocinando;
-    private double transcurrido;                            // tiempo que ha pasado mientras se prepara el pedido
+    private boolean ocupado;                        // indica si está reservado por un cliente para que lo atienda   
+    static boolean cocinando;                       // indica si el consumidor está preparando un pedido
+    private double transcurrido;                    // tiempo que ha pasado mientras se prepara el pedido
     private double porcentajePedido;
-    private Cliente cliente;                                // cliente que está siendo atendido
-    private Pedido p;                                       // pedido hecho por el cliente
+    private Cliente cliente;                        // cliente que está siendo atendido
+    private Pedido p;                               // pedido hecho por el cliente
     
     /**
      * Constructor
@@ -71,7 +71,7 @@ public class Consumidor {
             
             // Dibuja el plato
             g.drawImage(p.getSprite(),x+5,y+53,null);       // Sprite del pedido debajo del cocinero
-            g.drawImage(p.getSpritePizarron(),200,55,null); // Sprite del pedido en el pizarrón
+            g.drawImage(p.getSpritePizarron(),197,55,null); // Sprite del pedido en el pizarrón
         }else{
             sprtActual = sprt1;                             // Sprite del consumidor cuando no está 'cocinando'
         }
@@ -135,7 +135,7 @@ public class Consumidor {
      * true, si el consumidor está ocupado, false si no lo está
      * @return valor booleano que indica si el consumidor está ocupado o libre
      */
-    public boolean getEstado(){
+    public boolean getOcupado(){
         return ocupado;
     }
     
@@ -144,7 +144,7 @@ public class Consumidor {
      * o libre(false)
      * @param e valor que representa el estado del consumidor 
      */
-    public void setEstado(boolean e){
+    public void setOcupado(boolean e){
         ocupado = e;
     }
     
