@@ -193,7 +193,7 @@ public class Simulacion extends JPanel implements Runnable{
             }
         }
         transicionFin();
-        //System.out.println("Terminando ejecución de simulación");
+        System.out.println("Terminando ejecución de simulación");
     }
     
      /**
