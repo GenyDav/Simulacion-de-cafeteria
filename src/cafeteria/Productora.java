@@ -35,7 +35,6 @@ public class Productora extends Thread{
         // El número de cliente entre 1 y 8
         fila.add(new Cliente(round(random()*21+10),(int)(Math.random()*12+1),(int)(Math.random()*8+1)));
         //System.out.println("Agregado a la fila " + fila.size());
-        //System.out.println(fila.get(fila.size()-1).tmpEspera);
         total++;
         try{
             if(fila.size()==5){ // si en la fila hay un máximo de 5 clientes, se pausa la creación
@@ -70,6 +69,15 @@ public class Productora extends Thread{
      */
     public int getTamFila(){
         return fila.size();
+    }
+    
+    /**
+     * Método que devuelve un valor booleano que indica si la fila está 
+     * vacía(true) o tiene al menos un cliente(false)
+     * @return booleano que indica si la fila está vacía o no
+     */
+    public boolean filaVacia(){
+        return fila.isEmpty();
     }
     
     /**
