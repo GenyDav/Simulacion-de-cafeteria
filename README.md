@@ -1,6 +1,6 @@
 # Simulación de cafetería
 
-Este es un programa sencillo en donde se simula la llegada de clientes (generados aleatoriamente) a una pequeña cafetería.
+Este es un programa sencillo en donde se simula la llegada de clientes  a una pequeña cafetería. 
 Al llegar, los clientes ocupan su lugar en la fila. Cada cliente posee una cantidad de tiempo que define cuanto puede esperar
 en la fila. En cada unidad de tiempo que pasa en la simulación, el tiempo de espera de todos los clientes que están en la fila
 se resta en uno. Cuando el tiempo de espera de alguno de ellos llega a cero, este abandona la fila y sale del lugar.
@@ -8,6 +8,8 @@ se resta en uno. Cuando el tiempo de espera de alguno de ellos llega a cero, est
 Mientras el resto de los clientes esperan formados, el cliente al frente de la fila se acerca al mostrador frente al cocinero
 de la simulación y hace su pedido. El cocinero comienza con la preparación del plato ordenado, cuando termina su preparación lo
 entrega al cliente. El cliente atendido sale del lugar y el siguiente cliente en la fila pasa a ser atendido.
+
+El tipo de cliente, su tiempo de espera y el plato que ordena se generan de forma aleatoria.
 
 ## Características
 * Los clientes, su tiempo de espera, y el plato que ordenan se generan de forma aleatoria
@@ -22,7 +24,7 @@ entrega al cliente. El cliente atendido sale del lugar y el siguiente cliente en
 
 ## Lenguajes y herramientas
 * El proyecto está escrito en su totalidad en Java
-* Para reproducir audio se utiliza la librería JLayer
+* Para reproducir audio se utilizó la librería JLayer
 
 ## Créditos
 ### Imágenes
