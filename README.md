@@ -18,6 +18,8 @@ entrega al cliente. El cliente atendido sale del lugar y el siguiente cliente en
 * Conteo del número de platos vendidos para cada tipo al final de la simulación
 * Se pueden generar 8 clientes diferentes y 12 platos distintos
 
+![](pre.gif)
+
 ## Lenguajes y herramientas
 Java
 
