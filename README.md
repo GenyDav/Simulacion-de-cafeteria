@@ -18,10 +18,11 @@ entrega al cliente. El cliente atendido sale del lugar y el siguiente cliente en
 * Conteo del número de platos vendidos para cada tipo al final de la simulación
 * Se pueden generar 8 clientes diferentes y 12 platos distintos
 
-![](pre.gif)
+![Programa en funccionamiento](pre.gif)
 
 ## Lenguajes y herramientas
-Java
+* El proyecto está escrito en su totalidad en Java
+* Para reproducir audio se utiliza la librería JLayer
 
 ## Créditos
 ### Imágenes
