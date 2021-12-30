@@ -91,7 +91,7 @@ public class Simulacion extends JPanel implements Runnable{
         }
         // Cambiar el color de la pantalla cuando está en pausa
         if(Main.pausa){
-            g.setColor(new Color(0,0,66,150));
+            g.setColor(new Color(0,0,0,130));
             g.fillRect(0, 0, PX_ANCHO, PX_ALTO);          
         }
         // Mostrar degradado de pantalla solo al iniciar la simulación
@@ -193,7 +193,7 @@ public class Simulacion extends JPanel implements Runnable{
             }
         }
         transicionFin();
-        System.out.println("Terminando ejecución de simulación");
+        //System.out.println("Terminando ejecución de simulación");
     }
     
      /**
@@ -205,7 +205,7 @@ public class Simulacion extends JPanel implements Runnable{
             try{
                 Thread.sleep(25);
             }catch(InterruptedException e){}
-            myColour = new Color(0,0,0,v*0.1f); 
+            myColour = new Color(0,0,0,v*0.1f);
             dibuja();
         }
         inicioCiclo = false;    // evitar que se siga repitiendo el degradado
@@ -220,7 +220,7 @@ public class Simulacion extends JPanel implements Runnable{
             try{
                 Thread.sleep(25);
             }catch(InterruptedException e){}
-            myColour = new Color(0,0,0,v*0.1f); 
+            myColour = new Color(0,0,0,v*0.085f); 
             if(v==10){
                 estadisticas = true;
             }
@@ -260,7 +260,7 @@ public class Simulacion extends JPanel implements Runnable{
     }
     
     /**
-     * Método que esbloquea la ejecución del hilo cuando el usuario presionó el 
+     * Método que desbloquea la ejecución del hilo cuando el usuario presionó el 
      * boton para pausar la simulación
      */
     public synchronized void reanudarSimulacion(){
