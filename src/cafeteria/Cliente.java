@@ -213,7 +213,7 @@ public final class Cliente {
      * control de la simulación.
      */
     public void salir(float dt){
-        if(y<458){
+        if(y<465){
             y += velocidad*dt;  // calcular la nueva posición del cliente
             sprtActual = Imagen.cargaImagen("sprites/"+cliente+(int)spSalida+".png");
             //System.out.println("conteo: "+spSalida);
