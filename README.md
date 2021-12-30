@@ -26,11 +26,11 @@ entrega al cliente. El cliente atendido sale del lugar y el siguiente cliente en
 
 ## Créditos
 ### Imágenes
-* Ícono del programa: <a href="https://www.freepik.es/vector-gratis/iconos-taza-cafe_1530512.htm#query=coffe%20cup%20icons%20macrovector&position=26&from_view=search">Coffee cup icons</a> por <a href="https://www.freepik.es/macrovector">macrovector</a>
-* Sprites de los personajes: <a href="https://forums.rpgmakerweb.com/index.php?threads/tall-character-sprites-sv-template.119130/">Tall Character Sprites & SV template</a> por <a href="https://forums.rpgmakerweb.com/index.php?members/wtr.156088/">WTR</a>
-* Sprites para los platos: <a href="https://ghostpixxells.itch.io/pixelfood">Free Pixel Food</a> por <a href="https://itch.io/profile/ghostpixxells">ghostpixxells</a>
-* Imágen de fondo de la cafetería: <a href="https://www.deviantart.com/peekychew/art/Cafe-Restaurant-and-Bar-Tiles-532856201">Cafe, Restaurant and Bar Tiles</a> por <a href="https://www.deviantart.com/peekychew">PeekyChew</a>
-* Sprite de reloj: <a href="https://opengameart.org/content/lpc-clock-animation">Clock Animation</a> por <a href="https://opengameart.org/users/williamthompsonj">William.Thompsonj<a>
-* Imágen de pizarrón: <a href="https://pngfree.io/blackboard-rectangle-png-8317">Chalkboard illustration</a> en <a href="https://pngfree.io/">PNG Free</a>
+* Ícono del programa: [Coffee cup icons](https://www.freepik.es/vector-gratis/iconos-taza-cafe_1530512.htm#query=coffe%20cup%20icons%20macrovector&position=26&from_view=search) por [macrovector](https://www.freepik.es/macrovector)
+* Sprites de los personajes: [Tall Character Sprites & SV template](https://forums.rpgmakerweb.com/index.php?threads/tall-character-sprites-sv-template.119130/) por [WTR](https://forums.rpgmakerweb.com/index.php?members/wtr.156088/)
+* Sprites para los platos: [Free Pixel Food](https://ghostpixxells.itch.io/pixelfood) por [ghostpixxells](https://itch.io/profile/ghostpixxells)
+* Imágen de fondo de la cafetería: [Cafe, Restaurant and Bar Tiles](https://www.deviantart.com/peekychew/art/Cafe-Restaurant-and-Bar-Tiles-532856201) por [PeekyChew](https://www.deviantart.com/peekychew)
+* Sprite de reloj: [Clock Animation](https://opengameart.org/content/lpc-clock-animation) por [William.Thompsonj](https://opengameart.org/users/williamthompsonj)
+* Imágen de pizarrón: [Chalkboard illustration](https://pngfree.io/blackboard-rectangle-png-8317) en [PNG Free](https://pngfree.io/)
 ### Audio
-* Canción de fondo: <a href="https://opengameart.org/content/bossa-nova">Bossa Nova</a> por <a href="https://opengameart.org/users/joth?page=1">Joth</a>
+* Canción de fondo: [Bosa Nova](https://opengameart.org/content/bossa-nova) por [Joth](https://opengameart.org/users/joth?page=1)
