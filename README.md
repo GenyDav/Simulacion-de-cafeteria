@@ -32,7 +32,7 @@ El tipo de cliente, su tiempo de espera y el plato que ordena se generan de form
 * Sprites de los personajes: [Tall Character Sprites & SV template](https://forums.rpgmakerweb.com/index.php?threads/tall-character-sprites-sv-template.119130/) por [WTR](https://forums.rpgmakerweb.com/index.php?members/wtr.156088/)
 * Sprites para los platos: [Free Pixel Food](https://ghostpixxells.itch.io/pixelfood) por [ghostpixxells](https://itch.io/profile/ghostpixxells)
 * Imágen de fondo de la cafetería: [Cafe, Restaurant and Bar Tiles](https://www.deviantart.com/peekychew/art/Cafe-Restaurant-and-Bar-Tiles-532856201) por [PeekyChew](https://www.deviantart.com/peekychew)
-* Sprite de reloj: [Clock Animation](https://opengameart.org/content/lpc-clock-animation) por [William.Thompsonj](https://opengameart.org/users/williamthompsonj)
+* Sprite de reloj: [Clock Animation](https://opengameart.org/content/lpc-clock-animation) por [Lanea Zimmerman](https://opengameart.org/users/sharm) con contribución de [William.Thompsonj](https://opengameart.org/users/williamthompsonj)
 * Imágen de pizarrón: [Chalkboard illustration](https://pngfree.io/blackboard-rectangle-png-8317) en [PNG Free](https://pngfree.io/)
 ### Audio
 * Canción de fondo: [8 bit Bossa](https://opengameart.org/content/bossa-nova) por [Joth](https://opengameart.org/users/joth?page=1)
