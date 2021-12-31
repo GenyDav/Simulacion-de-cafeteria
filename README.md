@@ -14,9 +14,9 @@ El tipo de cliente, su tiempo de espera y el plato que ordena se generan de form
 ## Características
 * Los clientes, su tiempo de espera, y el plato que ordenan se generan de forma aleatoria
 * La interfaz gráfica permite pausar y reiniciar la animación
-* Conteo de tiempol tiempo transcurrido de la animación
+* Conteo del tiempo transcurrido de la animación
 * Reproducción continua de sonido de fondo
-* Conteo del número de de clientes perdidos y atendidos
+* Conteo del número de clientes perdidos y atendidos
 * Conteo del número de platos vendidos para cada tipo al final de la simulación
 * Se pueden generar 8 clientes diferentes y 12 platos distintos
 
@@ -35,4 +35,4 @@ El tipo de cliente, su tiempo de espera y el plato que ordena se generan de form
 * Sprite de reloj: [Clock Animation](https://opengameart.org/content/lpc-clock-animation) por [William.Thompsonj](https://opengameart.org/users/williamthompsonj)
 * Imágen de pizarrón: [Chalkboard illustration](https://pngfree.io/blackboard-rectangle-png-8317) en [PNG Free](https://pngfree.io/)
 ### Audio
-* Canción de fondo: [Bosa Nova](https://opengameart.org/content/bossa-nova) por [Joth](https://opengameart.org/users/joth?page=1)
+* Canción de fondo: [8 bit Bossa](https://opengameart.org/content/bossa-nova) por [Joth](https://opengameart.org/users/joth?page=1)
