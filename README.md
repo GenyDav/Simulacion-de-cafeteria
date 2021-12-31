@@ -11,6 +11,9 @@ entrega al cliente. El cliente atendido sale del lugar y el siguiente cliente en
 
 El tipo de cliente, su tiempo de espera y el plato que ordena se generan de forma aleatoria.
 
+Cuando el usuario detiene la animación, se muestra en pantalla un conteo del número de unidades vendidas para cada tipo de plato y
+el total absoluto de platos vendidos.
+
 ## Características
 * Los clientes, su tiempo de espera, y el plato que ordenan se generan de forma aleatoria
 * La interfaz gráfica permite pausar y reiniciar la animación
